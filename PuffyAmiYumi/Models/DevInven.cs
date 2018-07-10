@@ -22,10 +22,6 @@ namespace PuffyAmiYumi.Models
             throw new NotImplementedException();
         }
 
-        public Task<IActionResult> DeleteProduct(int ID)
-        {
-            throw new NotImplementedException();
-        }
 
         public Task<IActionResult> GetProduct()
         {
@@ -38,6 +34,10 @@ namespace PuffyAmiYumi.Models
         }
 
         public Task<IActionResult> UpdateProduct(int ID, Product product)
+        {
+            throw new NotImplementedException();
+        }
+        public Task<IActionResult> DeleteProduct(int ID)
         {
             throw new NotImplementedException();
         }

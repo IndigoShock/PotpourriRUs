@@ -30,5 +30,15 @@ namespace PuffyAmiYumi.Controllers
             _context.GetProductByID(id);
             return View();
         }
+        public IActionResult GetAll()
+        {
+            _context.GetProduct();
+            return View();
+        }
+        public IActionResult Update(int id, Product product)
+        {
+            _context.UpdateProduct(id, product);
+            return View();
+        }
     }
 }
