@@ -14,7 +14,7 @@ namespace PuffyAmiYumi.Controllers
         private IInventory _context;
         public HomeController(IInventory context)
         {
-            context = _context;
+            _context = context;
         }
         public IActionResult Index()
         {

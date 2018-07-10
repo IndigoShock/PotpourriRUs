@@ -17,5 +17,7 @@ namespace PuffyAmiYumi.Data
 
         public DbSet<Product> Products { get; set; }
         public DbSet<User> Users { get; set; }
+
+        //ModelBuilder.Entity<Product>().HasData(new Product{ Stock = 5, )
     }
 }
