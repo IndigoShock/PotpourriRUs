@@ -24,7 +24,7 @@ namespace PuffyAmiYumi
             services.AddMvc();
             services.AddScoped<IInventory, DevInven>();
             services.AddDbContext<YumiDbContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            options.UseSqlServer(Configuration.GetConnectionString("ProductionConnection")));
         }
         public Startup(IConfiguration configuration)
         {

@@ -18,6 +18,20 @@ namespace PuffyAmiYumi.Data
         public DbSet<Product> Products { get; set; }
         public DbSet<User> Users { get; set; }
 
-        //ModelBuilder.Entity<Product>().HasData(new Product{ Stock = 5, )
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {  // <Product> ---> ProductName --- Price --- ImageURL --- Stock
+            modelBuilder.Entity<Product>().HasData(
+                new { ID = 1, ProductName = "", Price = 0m, ImageURL = "", Stock = 0 },
+                new { ID = 2, ProductName = "", Price = 0m, ImageURL = "", Stock = 0 },
+                new { ID = 3, ProductName = "", Price = 0m, ImageURL = "", Stock = 0 },
+                new { ID = 4, ProductName = "", Price = 0m, ImageURL = "", Stock = 0 },
+                new { ID = 5, ProductName = "", Price = 0m, ImageURL = "", Stock = 0 },
+                new { ID = 6, ProductName = "", Price = 0m, ImageURL = "", Stock = 0 },
+                new { ID = 7, ProductName = "", Price = 0m, ImageURL = "", Stock = 0 },
+                new { ID = 8, ProductName = "", Price = 0m, ImageURL = "", Stock = 0 },
+                new { ID = 9, ProductName = "", Price = 0m, ImageURL = "", Stock = 0 },
+                new { ID = 10, ProductName = "", Price = 0m, ImageURL = "", Stock = 0 }
+                );
+        }
     }
 }
