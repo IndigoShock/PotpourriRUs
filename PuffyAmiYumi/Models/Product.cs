@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PuffyAmiYumi.Model
+namespace PuffyAmiYumi.Models
 {
     public class Product
     {
