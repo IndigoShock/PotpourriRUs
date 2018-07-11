@@ -12,6 +12,7 @@ namespace PuffyAmiYumi.Data
     {
         public YumiDbContext(DbContextOptions<YumiDbContext> options) : base(options)
         {
+
         }
 
         public DbSet<Product> Products { get; set; }
