@@ -2,19 +2,21 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PuffyAmiYumi.Data;
 
 namespace PuffyAmiYumi.Migrations
 {
     [DbContext(typeof(YumiDbContext))]
-    partial class YumiDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180710193359_addedSeedData")]
+    partial class addedSeedData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.1-rtm-30846")
+                .HasAnnotation("ProductVersion", "2.1.0-rtm-30799")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -37,16 +39,16 @@ namespace PuffyAmiYumi.Migrations
                     b.ToTable("Products");
 
                     b.HasData(
-                        new { ID = 1, ImageURL = "../asset/Geranium.jpg", Price = 11.99m, ProductName = "Karma-Patchouli-Potpourri", Stock = 100 },
-                        new { ID = 2, ImageURL = "../asset/RoseScented.jpg", Price = 11.99m, ProductName = "Karma-Rose-Potpourri", Stock = 100 },
-                        new { ID = 3, ImageURL = "../asset/VanillaScented.jpg", Price = 11.99m, ProductName = "Karma-Vanilla-Potpourri", Stock = 100 },
-                        new { ID = 4, ImageURL = "../asset/JasmineScented.jpg", Price = 11.99m, ProductName = "Karma-Jasmine-Potpourri", Stock = 100 },
-                        new { ID = 5, ImageURL = "../asset/Sandalwood.jpg", Price = 11.99m, ProductName = "Karma-Sandalwood-Potpourri", Stock = 100 },
-                        new { ID = 6, ImageURL = "../asset/Lavender.jpg", Price = 11.99m, ProductName = "Karma-Lavender-Potpourri", Stock = 100 },
-                        new { ID = 7, ImageURL = "../asset/SandalwoodSpice.jpg", Price = 12.99m, ProductName = "Esscents-Sandalwood-Spice-Potpourri", Stock = 100 },
-                        new { ID = 8, ImageURL = "../asset/Geranium.jpg", Price = 12.99m, ProductName = "Esscents-Geranium-Potpourri", Stock = 100 },
-                        new { ID = 9, ImageURL = "../asset/MorningBlossom.jpg", Price = 12.99m, ProductName = "Esscents-Morning-Blossom-Potpourri", Stock = 100 },
-                        new { ID = 10, ImageURL = "../asset/JasmineTea.jpg", Price = 12.99m, ProductName = "Esscents-Jasmine-Tea-Potpourri", Stock = 100 }
+                        new { ID = 1, ImageURL = "", Price = 0m, ProductName = "", Stock = 0 },
+                        new { ID = 2, ImageURL = "", Price = 0m, ProductName = "", Stock = 0 },
+                        new { ID = 3, ImageURL = "", Price = 0m, ProductName = "", Stock = 0 },
+                        new { ID = 4, ImageURL = "", Price = 0m, ProductName = "", Stock = 0 },
+                        new { ID = 5, ImageURL = "", Price = 0m, ProductName = "", Stock = 0 },
+                        new { ID = 6, ImageURL = "", Price = 0m, ProductName = "", Stock = 0 },
+                        new { ID = 7, ImageURL = "", Price = 0m, ProductName = "", Stock = 0 },
+                        new { ID = 8, ImageURL = "", Price = 0m, ProductName = "", Stock = 0 },
+                        new { ID = 9, ImageURL = "", Price = 0m, ProductName = "", Stock = 0 },
+                        new { ID = 10, ImageURL = "", Price = 0m, ProductName = "", Stock = 0 }
                     );
                 });
 

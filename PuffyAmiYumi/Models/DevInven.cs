@@ -14,14 +14,13 @@ namespace PuffyAmiYumi.Models
         private YumiDbContext _context;
         public DevInven(YumiDbContext context)
         {
-            context = _context;
+            _context = context;
         }
 
         public Task<IActionResult> CreateProduct(Product product)
         {
             throw new NotImplementedException();
         }
-
 
         public Task<IActionResult> GetProduct()
         {
