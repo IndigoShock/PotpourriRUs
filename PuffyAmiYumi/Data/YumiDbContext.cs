@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PuffyAmiYumi.Model;
 using PuffyAmiYumi.Models;
 using System;
 using System.Collections.Generic;

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -9,7 +10,7 @@ using PuffyAmiYumi.Models;
 using PuffyAmiYumi.Models.ViewModel;
 
 namespace PuffyAmiYumi.Controllers
-{
+{   [Authorize]
     public class AccountController : Controller
     {
         private UserManager<ApplicationUser> _userManager;
@@ -25,29 +26,47 @@ namespace PuffyAmiYumi.Controllers
         {
             return View();
         }
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult Register()
         {
             return View();
         }
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult Login()
         {
             return View();
         }
 
-        [HttpPost]
         [AllowAnonymous]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel rvm)
         {
-            var user = new ApplicationUser { UserName = rvm.Email, Email = rvm.Email, FirstName = rvm.FirstName, LastName = rvm.LastName, Birthday = rvm.Birthday, Password = rvm.Password };
-            var result = await _userManager.CreateAsync(user, rvm.Password);
-            if (result.Succeeded)
+            if (ModelState.IsValid)
             {
+
+                List<Claim> claims = new List<Claim>();
+                var user = new ApplicationUser {
+                    UserName = rvm.Email,
+                    Email = rvm.Email,
+                    FirstName = rvm.FirstName,
+                    LastName = rvm.LastName,
+                    Birthday = rvm.Birthday,
+                    Password = rvm.Password
+                };
+                var result = await _userManager.CreateAsync(user, rvm.Password);
+                if (result.Succeeded)
+                {
+                    Claim nameClaim = new Claim(ClaimTypes.Name, $"{user.FirstName} {user.LastName}");
+                
                 await _signInManager.SignInAsync(user, isPersistent: false);
                 
                 return View("Home", "Index");
+            }
+
+
             }
             return View();
         }

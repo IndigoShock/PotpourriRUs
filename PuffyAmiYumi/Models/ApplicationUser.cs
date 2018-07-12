@@ -13,4 +13,9 @@ namespace PuffyAmiYumi.Models
         public DateTime Birthday { get; set; }
         public string Password { get; internal set; }
     }
+    public static class ApplicationRoles
+    {
+        public const string Member = "Member";
+        public const string Admin = "Admin";
+    }
 }

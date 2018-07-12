@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PuffyAmiYumi.Data;
-using PuffyAmiYumi.Model;
 using PuffyAmiYumi.Models.Interfaces;
 using System;
 using System.Collections.Generic;

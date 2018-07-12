@@ -29,15 +29,15 @@ namespace PuffyAmiYumi
         {
             services.AddMvc();
             services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("IdentityConnection")));
+            options.UseSqlServer(Configuration.GetConnectionString("IdentityOffline")));
+            services.AddScoped<IInventory, DevInven>();
+            services.AddDbContext<YumiDbContext>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddScoped<IInventory, DevInven>();
-            services.AddDbContext<YumiDbContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("ProductionConnection")));
         }
 
 
@@ -52,7 +52,6 @@ namespace PuffyAmiYumi
             app.UseStaticFiles();
 
             app.UseMvcWithDefaultRoute();
-            app.UseStaticFiles();
 
             app.Run(async (context) =>
             {
