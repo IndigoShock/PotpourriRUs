@@ -60,15 +60,26 @@ namespace PuffyAmiYumi.Controllers
                 if (result.Succeeded)
                 {
                     Claim nameClaim = new Claim(ClaimTypes.Name, $"{user.FirstName} {user.LastName}");
-                
-                await _signInManager.SignInAsync(user, isPersistent: false);
-                
-                return View("Home", "Index");
-            }
+                    Claim birthdayClaim = new Claim(ClaimTypes.DateOfBirth,
+                        new DateTime(user.Birthday.Year,
+                        user.Birthday.Month,
+                        user.Birthday.Day).ToString("u"),
+                        ClaimValueTypes.DateTime);
+                    Claim emailClaim = new Claim(ClaimTypes.Email, user.Email, ClaimValueTypes.Email);
 
+                    claims.Add(nameClaim);
+                    claims.Add(birthdayClaim);
+                    claims.Add(emailClaim);
 
+                    await _userManager.AddClaimsAsync(user, claims);
+                    await _userManager.AddToRoleAsync(user, ApplicationRoles.Member);
+
+                    await _signInManager.SignInAsync(user, false);
+                
+                    return RedirectToAction("Index", "Home");
+                }
             }
-            return View();
+            return View(rvm);
         }
 
 
@@ -77,13 +88,28 @@ namespace PuffyAmiYumi.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
-            var result = await _signInManager.PasswordSignInAsync(model.Email,
-                model.Password, true, lockoutOnFailure: false);
+            var result = await _signInManager.PasswordSignInAsync(
+                model.Email,
+                model.Password,
+                false,
+                lockoutOnFailure: false);
             if (result.Succeeded)
             {
                 return RedirectToAction("Index", "Home");
             }
+            else
+            {
+                ModelState.AddModelError(string.Empty, "You don't know your credentials");
+            }
             return View(model);
+        }
+        
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            TempData["LoggedOut"] = "User Logged Out";
+
+            return RedirectToAction("Index", "Home");
         }
 
     }
