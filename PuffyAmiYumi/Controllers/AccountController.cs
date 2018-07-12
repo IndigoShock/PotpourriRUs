@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PuffyAmiYumi.Models;
 using PuffyAmiYumi.Models.ViewModel;
+using System.Threading.Tasks;
 
 namespace PuffyAmiYumi.Controllers
 {
@@ -20,16 +17,19 @@ namespace PuffyAmiYumi.Controllers
             _userManager = userManager;
             _signInManager = signInManager;
         }
+
         [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
+
         [HttpGet]
         public IActionResult Register()
         {
             return View();
         }
+
         [HttpGet]
         public IActionResult Login()
         {
@@ -46,12 +46,11 @@ namespace PuffyAmiYumi.Controllers
             if (result.Succeeded)
             {
                 await _signInManager.SignInAsync(user, isPersistent: false);
-                
+
                 return View("Home", "Index");
             }
             return View();
         }
-
 
         [HttpPost]
         [AllowAnonymous]
@@ -66,6 +65,5 @@ namespace PuffyAmiYumi.Controllers
             }
             return View(model);
         }
-
     }
 }

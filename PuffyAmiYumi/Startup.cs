@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -18,6 +14,7 @@ namespace PuffyAmiYumi
     public class Startup
     {
         public IConfiguration Configuration { get; }
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -40,7 +37,6 @@ namespace PuffyAmiYumi
             options.UseSqlServer(Configuration.GetConnectionString("ProductionConnection")));
         }
 
-
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
@@ -50,9 +46,7 @@ namespace PuffyAmiYumi
             }
             app.UseAuthentication();
             app.UseStaticFiles();
-
             app.UseMvcWithDefaultRoute();
-            app.UseStaticFiles();
 
             app.Run(async (context) =>
             {
