@@ -2,10 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <UserSecretsId>f2f76ccd-6bae-4fc5-88fe-087c5b1931a1</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Views\NewFolder\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
