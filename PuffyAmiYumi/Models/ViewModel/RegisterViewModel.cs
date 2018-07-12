@@ -18,6 +18,5 @@ namespace PuffyAmiYumi.Models.ViewModel
         public string Password { get; set; }
         [Compare("Password", ErrorMessage = "The Passwords you had input don't seem to match"), Required]
         public string ConfirmPassword { get; set; }
-
     }
 }
