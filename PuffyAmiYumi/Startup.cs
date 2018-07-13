@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -7,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PuffyAmiYumi.Data;
 using PuffyAmiYumi.Models;
+using PuffyAmiYumi.Models.Handlers;
 using PuffyAmiYumi.Models.Interfaces;
 
 namespace PuffyAmiYumi
@@ -38,7 +40,13 @@ namespace PuffyAmiYumi
 
             services.AddScoped<IInventory, DevInven>();
 
+            services.AddAuthorization(options =>
 
+            {
+                options.AddPolicy("AdminOnly", policy => policy.RequireRole(ApplicationRoles.Admin));
+            });
+
+            services.AddTransient<IAuthorizationHandler, AdminHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

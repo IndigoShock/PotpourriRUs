@@ -6,17 +6,16 @@
 <p>We've handpicked all of these for you from our special reserves. Taken from the most exotic of places. We talk directly with our suppliers to get you the best quality potpourri possible. 100% organic. Guaranteed satisfaction!</p>
 
 @*
-<div class="container-fluid">
+    <div class="container-fluid">
 
-    @foreach (var item in Model)
-    {
-    <h2>Name: @item.Name</h2>
-    <p>Product Name: @item.Flavor</p>
-    <p>Price: @item.Price</p>
-    <img src="@item.ImageUrl" />
-    <p>Stock: @item.Stock</p>
+        @foreach (var item in Model)
+        {
+            <h2>Name: @item.Name</h2>
+            <p>Product Name: @item.Flavor</p>
+            <p>Price: @item.Price</p>
+            <img src="@item.ImageUrl" />
 
-    <p><a asp-controller="Products" asp-action="Details" asp-route-id="@item.Id">View Details</a></p>
-    }
-</div>
+            <p><a asp-controller="Products" asp-action="Details" asp-route-id="@item.Id">View Details</a></p>
+        }
+    </div>
 *@
