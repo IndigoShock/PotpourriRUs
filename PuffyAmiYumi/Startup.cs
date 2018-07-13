@@ -26,15 +26,15 @@ namespace PuffyAmiYumi
         {
             services.AddMvc();
             services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("IdentityConnection")));
+            options.UseSqlServer(Configuration.GetConnectionString("IdentityOffline")));
+            services.AddScoped<IInventory, DevInven>();
+            services.AddDbContext<YumiDbContext>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddScoped<IInventory, DevInven>();
-            services.AddDbContext<YumiDbContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("ProductionConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
