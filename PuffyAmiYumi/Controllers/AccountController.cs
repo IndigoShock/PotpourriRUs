@@ -53,13 +53,12 @@ namespace PuffyAmiYumi.Controllers
                     Email = rvm.Email,
                     FirstName = rvm.FirstName,
                     LastName = rvm.LastName,
-                    Birthday = rvm.Birthday,
-                    Password = rvm.Password
+                    Birthday = rvm.Birthday
                 };
                 var result = await _userManager.CreateAsync(user, rvm.Password);
                 if (result.Succeeded)
                 {
-                    Claim nameClaim = new Claim(ClaimTypes.Name, $"{user.FirstName} {user.LastName}");
+                    Claim nameClaim = new Claim("Name", $"{user.FirstName} {user.LastName}");
                     Claim birthdayClaim = new Claim(ClaimTypes.DateOfBirth,
                         new DateTime(user.Birthday.Year,
                         user.Birthday.Month,
@@ -72,11 +71,10 @@ namespace PuffyAmiYumi.Controllers
                     claims.Add(emailClaim);
 
                     await _userManager.AddClaimsAsync(user, claims);
-                    await _userManager.AddToRoleAsync(user, ApplicationRoles.Member);
+                    //await _userManager.AddToRoleAsync(user, ApplicationRoles.Member);
 
-                    await _signInManager.SignInAsync(user, false);
                 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Login", "Account");
                 }
             }
             return View(rvm);
