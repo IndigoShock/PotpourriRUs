@@ -1,9 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PuffyAmiYumi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace PuffyAmiYumi.Data
 {
@@ -11,7 +7,6 @@ namespace PuffyAmiYumi.Data
     {
         public YumiDbContext(DbContextOptions<YumiDbContext> options) : base(options)
         {
-
         }
 
         public DbSet<Product> Products { get; set; }
