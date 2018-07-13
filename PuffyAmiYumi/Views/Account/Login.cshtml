@@ -1,6 +1,14 @@
-﻿<main>
+﻿@using Microsoft.AspNetCore.Identity
+@using PuffyAmiYumi.Models
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    Layout = "_Layout";
+}
+
+<main>
     <div class="card-img-overlay login-div">
-        <form class="card-form" asp-controller="Account" asp-action="Post">
+        <form class="card-form" asp-controller="Account" asp-action="Login">
             <h4 class="card-text"> Login </h4>
             <input type="text" placeholder="Email" name="Email" />
             <input type="password" placeholder="Password" name="Password" />

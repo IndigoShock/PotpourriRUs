@@ -30,13 +30,13 @@ namespace PuffyAmiYumi.Controllers
         [HttpGet]
         public IActionResult Register()
         {
-            return View();
+            return View(new RegisterViewModel());
         }
         [AllowAnonymous]
         [HttpGet]
         public IActionResult Login()
         {
-            return View();
+            return View(new LoginViewModel());
         }
 
         [AllowAnonymous]
@@ -53,8 +53,7 @@ namespace PuffyAmiYumi.Controllers
                     Email = rvm.Email,
                     FirstName = rvm.FirstName,
                     LastName = rvm.LastName,
-                    Birthday = rvm.Birthday,
-                    Password = rvm.Password
+                    Birthday = rvm.Birthday
                 };
                 var result = await _userManager.CreateAsync(user, rvm.Password);
                 if (result.Succeeded)
@@ -72,7 +71,7 @@ namespace PuffyAmiYumi.Controllers
                     claims.Add(emailClaim);
 
                     await _userManager.AddClaimsAsync(user, claims);
-                    await _userManager.AddToRoleAsync(user, ApplicationRoles.Member);
+                    //await _userManager.AddToRoleAsync(user, ApplicationRoles.Member);
 
                     await _signInManager.SignInAsync(user, false);
                 
@@ -95,6 +94,9 @@ namespace PuffyAmiYumi.Controllers
                 lockoutOnFailure: false);
             if (result.Succeeded)
             {
+                var user = await _userManager.FindByEmailAsync(model.Email);
+
+
                 return RedirectToAction("Index", "Home");
             }
             else

@@ -28,15 +28,19 @@ namespace PuffyAmiYumi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
             services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("IdentityOffline")));
-            services.AddScoped<IInventory, DevInven>();
+
             services.AddDbContext<YumiDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
+
+            services.AddScoped<IInventory, DevInven>();
+
 
         }
 
