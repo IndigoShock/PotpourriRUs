@@ -66,7 +66,7 @@ namespace PuffyAmiYumi.Controllers
                     claims.Add(emailClaim);
 
                     await _userManager.AddClaimsAsync(user, claims);
-                    //await _userManager.AddToRoleAsync(user, ApplicationRoles.Member);
+                    await _userManager.AddToRoleAsync(user, ApplicationRoles.Admin);
 
                     await _signInManager.SignInAsync(user, false);
 

@@ -6,7 +6,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\" />
+    <None Include="wwwroot\asset\Geranium.jpg" />
+    <None Include="wwwroot\asset\JasmineScented.jpg" />
+    <None Include="wwwroot\asset\JasmineTea.jpg" />
+    <None Include="wwwroot\asset\Lavender.jpg" />
+    <None Include="wwwroot\asset\MorningBlossom.jpg" />
+    <None Include="wwwroot\asset\Patchouli.jpg" />
+    <None Include="wwwroot\asset\RoseScented.jpg" />
+    <None Include="wwwroot\asset\Sandalwood.jpg" />
+    <None Include="wwwroot\asset\SandalwoodSpice.jpg" />
+    <None Include="wwwroot\asset\VanillaScented.jpg" />
   </ItemGroup>
 
   <ItemGroup>

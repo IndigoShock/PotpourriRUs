@@ -18,24 +18,27 @@
             </button>
             <div class="navbar-collapse collapse" id="navbar7">
 
-                <ul class="navbar-nav">
+                <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
                         <a class="nav-link" asp-controller="Product" asp-action="ViewAllProducts">Products</a>
                     </li>
                 </ul>
                 <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
-                    <ul class="navbar-nav">
+                    <ul class="navbar-nav ml-auto">
+@if (SignInManager.IsSignedIn(User))
+{
+    <li class="userName">
+        Welcome Back @User.Claims.First(c => c.Type == "Name").Value
+    </li>
+}
+else
+{
                         <li class="nav-item login">
                             <a class="nav-link" asp-controller="Account" asp-action="Login">Login</a>
                         </li>
                         <li class="nav-item login">
                             <a class="nav-link " asp-controller="Account" asp-action="Register">Register</a>
                         </li>
-@if (SignInManager.IsSignedIn(User))
-{
-    <li>
-        @User.Claims.First(c => c.Type == "Name").Value
-    </li>
 }
 
                     </ul>

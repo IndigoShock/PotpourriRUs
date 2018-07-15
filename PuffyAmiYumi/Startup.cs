@@ -14,7 +14,6 @@ namespace PuffyAmiYumi
     public class Startup
     {
         public IConfiguration Configuration { get; }
-
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -36,8 +35,16 @@ namespace PuffyAmiYumi
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddScoped<IInventory, DevInven>();
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("HasEmail", policy => policy.RequireClaim("emailClaim"));
+                options.AddPolicy("AdminOnly", policy => policy.RequireRole(ApplicationRoles.Admin));
+                options.AddPolicy("MemberOnly", policy => policy.RequireRole(ApplicationRoles.Member));
+            });
 
+            
+            services.AddScoped<IInventory, DevInven>();
+            
 
         }
 

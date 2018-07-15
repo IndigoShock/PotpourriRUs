@@ -10,7 +10,8 @@ using PuffyAmiYumi.Models;
 using PuffyAmiYumi.Models.ViewModel;
 
 namespace PuffyAmiYumi.Controllers
-{   [Authorize]
+{
+    [Authorize]
     public class AccountController : Controller
     {
         private UserManager<ApplicationUser> _userManager;
@@ -22,6 +23,7 @@ namespace PuffyAmiYumi.Controllers
             _signInManager = signInManager;
         }
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult Index()
         {
             return View();
@@ -91,9 +93,12 @@ namespace PuffyAmiYumi.Controllers
                 model.Password,
                 false,
                 lockoutOnFailure: false);
-            if (result.Succeeded)
+
+
+            var user = await _userManager.FindByEmailAsync(model.Email);
+            if(await _userManager.IsInRoleAsync(user, ApplicationRoles.Admin))
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Admin");
             }
             else
             {
