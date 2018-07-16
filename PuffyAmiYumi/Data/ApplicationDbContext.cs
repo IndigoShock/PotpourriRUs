@@ -9,5 +9,9 @@ namespace PuffyAmiYumi.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> option) : base(option)
         {
         }
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+        }
     }
 }

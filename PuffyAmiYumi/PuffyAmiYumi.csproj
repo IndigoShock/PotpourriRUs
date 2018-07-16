@@ -2,11 +2,20 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <UserSecretsId>f2f76ccd-6bae-4fc5-88fe-087c5b1931a1</UserSecretsId>
+    <UserSecretsId>9b139ca7-c8fe-45f4-b0fc-3eec4f8ab657</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\" />
+    <None Include="wwwroot\asset\Geranium.jpg" />
+    <None Include="wwwroot\asset\JasmineScented.jpg" />
+    <None Include="wwwroot\asset\JasmineTea.jpg" />
+    <None Include="wwwroot\asset\Lavender.jpg" />
+    <None Include="wwwroot\asset\MorningBlossom.jpg" />
+    <None Include="wwwroot\asset\Patchouli.jpg" />
+    <None Include="wwwroot\asset\RoseScented.jpg" />
+    <None Include="wwwroot\asset\Sandalwood.jpg" />
+    <None Include="wwwroot\asset\SandalwoodSpice.jpg" />
+    <None Include="wwwroot\asset\VanillaScented.jpg" />
   </ItemGroup>
 
   <ItemGroup>

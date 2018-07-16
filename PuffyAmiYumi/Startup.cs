@@ -14,7 +14,6 @@ namespace PuffyAmiYumi
     public class Startup
     {
         public IConfiguration Configuration { get; }
-
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -25,16 +24,28 @@ namespace PuffyAmiYumi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
             services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("IdentityConnection")));
+            options.UseSqlServer(Configuration.GetConnectionString("IdentityOffline")));
+
+            services.AddDbContext<YumiDbContext>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("HasEmail", policy => policy.RequireClaim("emailClaim"));
+                options.AddPolicy("AdminOnly", policy => policy.RequireRole(ApplicationRoles.Admin));
+                options.AddPolicy("MemberOnly", policy => policy.RequireRole(ApplicationRoles.Member));
+            });
+
+            
             services.AddScoped<IInventory, DevInven>();
-            services.AddDbContext<YumiDbContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("ProductionConnection")));
+            
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
