@@ -43,10 +43,10 @@ namespace PuffyAmiYumi
             services.AddMvc();
 
             services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("IdentityOnline")));
+            options.UseSqlServer(Configuration.GetConnectionString("IdentityOffline")));
 
             services.AddDbContext<YumiDbContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("ProductionConnection")));
+            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -61,6 +61,7 @@ namespace PuffyAmiYumi
 
             
             services.AddScoped<IInventory, DevInven>();
+            services.AddScoped<ICart, CartService>();
             
 
         }

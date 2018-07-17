@@ -1,6 +1,4 @@
-﻿body {
-}
-/*.product{
+﻿/*.product{
     width: 30%;
     display: inline-block;    
 }*/
@@ -21,12 +19,8 @@
 .userName{
     font-size: 25px;
     font-weight: bolder;
-    
 }
-.card-header{
-
-}
-h5{
+h5 {
     font-weight: bold;
 }
 /*.row{

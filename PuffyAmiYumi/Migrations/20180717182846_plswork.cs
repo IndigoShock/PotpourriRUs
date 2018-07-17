@@ -2,7 +2,7 @@
 
 namespace PuffyAmiYumi.Migrations
 {
-    public partial class editIMG5 : Migration
+    public partial class plswork : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
