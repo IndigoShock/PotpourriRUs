@@ -12,7 +12,7 @@ namespace PuffyAmiYumi.Controllers
         private IInventory _context;
 
         private readonly IConfiguration Configuration;
-
+        // this connects the Inventory interface with our products controller
         public ProductsController(IInventory context, IConfiguration configuration)
         {
             _context = context;
