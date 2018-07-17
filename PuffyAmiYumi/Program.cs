@@ -29,9 +29,11 @@ namespace PuffyAmiYumi
                     logger.LogError(ex, "An error occurred seeding the DB.");
                 }
             }
+            host.Run();
         }
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>().Build();
+                .UseStartup<Startup>()
+                .Build();
     }
 }
