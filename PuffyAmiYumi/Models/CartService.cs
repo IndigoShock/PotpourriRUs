@@ -14,6 +14,16 @@ namespace PuffyAmiYumi.Models
         {
             _context = context;
         }
+
+        public Cart AddProductToCart(ApplicationUser user, Cart cart, Product product)
+        {
+            CartItem item = new CartItem();
+            item.CartID = cart.ID;
+            item.Product = product;
+            cart.CartItems.Add(item);
+            return cart;
+        }
+
         public List<Product> GetCartItems()
         {
             return _context.Products.OrderByDescending(a => a.ID).ToList();

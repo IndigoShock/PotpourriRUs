@@ -48,7 +48,6 @@ namespace PuffyAmiYumi.Controllers
         {
             if (ModelState.IsValid)
             {
-
                 List<Claim> claims = new List<Claim>();
                 var user = new ApplicationUser {
                     UserName = rvm.Email,
@@ -57,6 +56,10 @@ namespace PuffyAmiYumi.Controllers
                     LastName = rvm.LastName,
                     Birthday = rvm.Birthday
                 };
+
+                Cart cart = new Cart();
+                cart.UserID = user.Id;
+
                 var result = await _userManager.CreateAsync(user, rvm.Password);
                 if (result.Succeeded)
                 {

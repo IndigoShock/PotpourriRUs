@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PuffyAmiYumi.Data;
 using PuffyAmiYumi.Models;
+using PuffyAmiYumi.Models.Interfaces;
 
 namespace PuffyAmiYumi.Controllers
 {
@@ -15,10 +17,34 @@ namespace PuffyAmiYumi.Controllers
     public class ShopController : Controller
     {
         private readonly YumiDbContext _context;
-
-        public ShopController(YumiDbContext context)
+        private ICart _cart;
+        private UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        public ShopController(YumiDbContext context, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, ICart cart)
         {
             _context = context;
+            _signInManager = signInManager;
+            _userManager = userManager;
+            _cart = cart;
+        }
+        public async Task<IActionResult> AddToCart(int id)
+        {
+            Product product = _context.Products.First(f => f.ID == id);
+            var user = await _userManager.FindByEmailAsync(User.Identity.Name);
+            Cart cart = _context.Carts.FirstOrDefault(c => c.UserID == user.Id);
+            if(cart == null)
+            {
+                cart = new Cart();
+                cart.UserID = user.Id;
+            }
+            _cart.AddProductToCart(user, cart, product);
+            return RedirectToAction("MyCart", "Shop");
+        }
+        public async Task<IActionResult> MyCart()
+        {
+            var user = await _userManager.FindByEmailAsync(User.Identity.Name);
+            Cart cart = _context.Carts.FirstOrDefault(c => c.UserID == user.Id);
+            return View(cart);
         }
 
         [AllowAnonymous]
