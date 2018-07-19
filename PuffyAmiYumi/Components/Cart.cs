@@ -22,7 +22,11 @@ namespace PuffyAmiYumi.Components
             _userManager = userManager;
             _context = context;
         }
-
+        /// <summary>
+        /// view Component
+        /// </summary>
+        /// <param name="purchased"></param>
+        /// <returns></returns>
         public async Task<IViewComponentResult> InvokeAsync(bool purchased)
         {
             var user = await _userManager.FindByEmailAsync(User.Identity.Name);
