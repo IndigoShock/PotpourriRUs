@@ -1,11 +1,10 @@
-﻿@using Microsoft.AspNetCore.Identity
-@using PuffyAmiYumi.Models
-@inject UserManager<ApplicationUser> UserManager
-
+﻿
 @{
     Layout = "_Layout";
 }
+<body>
 
+    
 <main>
     <div class="card-img-overlay login-div">
         <form class="card-form" asp-controller="Account" asp-action="Login">
@@ -16,3 +15,4 @@
         </form>
     </div>
 </main>
+</body>

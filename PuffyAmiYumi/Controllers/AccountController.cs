@@ -24,6 +24,7 @@ namespace PuffyAmiYumi.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult Index()
         {
             return View();
@@ -57,13 +58,16 @@ namespace PuffyAmiYumi.Controllers
                     Email = rvm.Email,
                     FirstName = rvm.FirstName,
                     LastName = rvm.LastName,
-                    Birthday = rvm.Birthday,
-                    Password = rvm.Password
+                    Birthday = rvm.Birthday
                 };
+
+                Cart cart = new Cart();
+                cart.UserTag = user.Id;
+
                 var result = await _userManager.CreateAsync(user, rvm.Password);
                 if (result.Succeeded)
                 {
-                    Claim nameClaim = new Claim(ClaimTypes.Name, $"{user.FirstName} {user.LastName}");
+                    Claim nameClaim = new Claim("Name", $"{user.FirstName} {user.LastName}");
                     Claim birthdayClaim = new Claim(ClaimTypes.DateOfBirth,
                         new DateTime(user.Birthday.Year,
                         user.Birthday.Month,
@@ -76,11 +80,9 @@ namespace PuffyAmiYumi.Controllers
                     claims.Add(emailClaim);
 
                     await _userManager.AddClaimsAsync(user, claims);
-                    //await _userManager.AddToRoleAsync(user, ApplicationRoles.Member);
+                    await _userManager.AddToRoleAsync(user, ApplicationRoles.Member);
 
-                    await _signInManager.SignInAsync(user, false);
-
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Login", "Account");
                 }
             }
             return View(rvm);
@@ -96,15 +98,17 @@ namespace PuffyAmiYumi.Controllers
                 model.Password,
                 false,
                 lockoutOnFailure: false);
-            if (result.Succeeded)
+
+            var user = await _userManager.FindByEmailAsync(model.Email);
+
+            if (await _userManager.IsInRoleAsync(user, ApplicationRoles.Admin))
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Admin");
             }
             else
             {
-                ModelState.AddModelError(string.Empty, "You don't know your credentials");
+                return RedirectToAction("Index", "Home");
             }
-            return View(model);
         }
 
         public async Task<IActionResult> Logout()

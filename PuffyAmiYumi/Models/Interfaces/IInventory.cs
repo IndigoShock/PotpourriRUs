@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace PuffyAmiYumi.Models.Interfaces
@@ -9,7 +10,7 @@ namespace PuffyAmiYumi.Models.Interfaces
 
         Task<IActionResult> GetProductByID(int ID);
 
-        Task<IActionResult> GetProduct();
+        List<Product> GetProduct();
 
         Task<IActionResult> UpdateProduct(int ID, Product product);
 

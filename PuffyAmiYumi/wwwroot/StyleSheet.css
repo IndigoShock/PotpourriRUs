@@ -1,2 +1,42 @@
-﻿body {
+﻿/*.product{
+    width: 30%;
+    display: inline-block;    
+}*/
+/*.holdproducts {
+    margin: 1rem;
+    justify-content: center;
+    width:40%;
+    display: inline-block;
+}*/
+/*.container{
+    flex: 1;
+    padding:30px;
+}*/
+.productIMG{
+    width: 80%;
+    /*height: 200px;*/
+}
+.userName{
+    font-size: 25px;
+    font-weight: bolder;
+}
+h5 {
+    font-weight: bold;
+}
+/*.row{
+    width: 100%;
+
+}*/
+/*.title{
+    text-overflow: '' !important;
+    font-size: 2vw;
+}
+.contain{
+    text-overflow:inherit;
+    height:15% !important;
+    text-overflow: '' !important;
+    display: inline-block;
+}*/
+.login-div {
+    padding-top: 60px;
 }

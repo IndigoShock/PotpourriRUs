@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -8,7 +7,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PuffyAmiYumi.Data;
 using PuffyAmiYumi.Models;
-using PuffyAmiYumi.Models.Handlers;
 using PuffyAmiYumi.Models.Interfaces;
 
 namespace PuffyAmiYumi
@@ -20,6 +18,23 @@ namespace PuffyAmiYumi
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+        }
+
+        public Startup(IHostingEnvironment env)
+        {
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json",
+                             optional: false,
+                             reloadOnChange: true)
+                .AddEnvironmentVariables();
+
+            if (env.IsDevelopment())
+            {
+                builder.AddUserSecrets<Startup>();
+            }
+
+            Configuration = builder.Build();
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -38,15 +53,15 @@ namespace PuffyAmiYumi
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddScoped<IInventory, DevInven>();
-
             services.AddAuthorization(options =>
-
             {
+                options.AddPolicy("HasEmail", policy => policy.RequireClaim("emailClaim"));
                 options.AddPolicy("AdminOnly", policy => policy.RequireRole(ApplicationRoles.Admin));
+                options.AddPolicy("MemberOnly", policy => policy.RequireRole(ApplicationRoles.Member));
             });
 
-            services.AddTransient<IAuthorizationHandler, AdminHandler>();
+            services.AddScoped<IInventory, DevInven>();
+            services.AddScoped<ICart, CartService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

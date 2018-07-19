@@ -1,13 +1,8 @@
-﻿<div class="container-fluid">
+﻿@model List<Product>
 
-    @foreach (var item in Model)
-    {
-        <h2>Name: @item.Name</h2>
-        <p>Product Name: @item.ProductName</p>
-        <p>Price: @item.Price</p>
-        <img src="@item.ImageUrl" />
-        <p>Stock: @item.Stock</p>
-
-        <p><a asp-controller="Products" asp-action="Details" asp-route-id="@item.Id">View Details</a></p>
-    }
-</div>
+@foreach (Product item in Model)
+{
+    <h2>@item.ProductName</h2>
+    <img src="@item.ImageURL" />
+    <p>@item.Price</p>
+}

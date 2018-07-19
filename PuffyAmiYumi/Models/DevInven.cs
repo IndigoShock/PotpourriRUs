@@ -2,6 +2,8 @@
 using PuffyAmiYumi.Data;
 using PuffyAmiYumi.Models.Interfaces;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace PuffyAmiYumi.Models
@@ -20,9 +22,10 @@ namespace PuffyAmiYumi.Models
             throw new NotImplementedException();
         }
 
-        public Task<IActionResult> GetProduct()
+        public List<Product> GetProduct()
         {
-            throw new NotImplementedException();
+            var makeList = _context.Products.ToList();
+            return makeList;
         }
 
         public Task<IActionResult> GetProductByID(int ID)

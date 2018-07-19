@@ -1,0 +1,30 @@
+﻿@model PuffyAmiYumi.Models.Product
+
+@{
+    Layout = "_Layout";
+}
+<main>
+    <section>
+        <div class="row mb-2">
+            <div class="col-md-6">
+                <div class="card flex-md-row mb-4 box-shadow h-md-250">
+                    <div class="card-body d-flex flex-column align-items-start">
+                        <strong class="d-inline-block mb-2 text-primary">Ami & Yumi's</strong>
+                        <h3 class="mb-0">
+                            <a class="text-dark" href="#">@Model.ProductName</a>
+                        </h3>
+                        <div class="mb-1 text-muted">Nov 12</div>
+                        <p class="card-text mb-auto">@Model.ProductName is a great product. Buy it!</p>
+                        <a href="#">Add To Cart</a>
+                    </div>
+                    <img class="card-img-right flex-auto d-none d-lg-block" src="@Model.ImageURL" alt="Product">
+                </div>
+            </div>
+         </div>
+</section>
+</main>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

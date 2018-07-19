@@ -1,0 +1,59 @@
+﻿@model IEnumerable<PuffyAmiYumi.Models.Product>
+
+@{
+    Layout = "_Layout";
+}
+
+
+
+        <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+            <h1 class="display-4">Pricing</h1>
+            <p class="lead">Welcome to our products page! Here you can browse our selection and have a top quality Potpourri shipped to your house in days.</p>
+        </div>
+        <section class="holdproducts">
+            <div class="container-fluid align-self-md-center">
+                <div class="row">
+
+              @foreach (var item in Model)
+                {
+                    <div class="col-lg-4 col-md-6 col-sm-12 mt-4">
+                        <div class="card-deck mb-3 text-center">
+                            <div class="card mb-4 box-shadow">
+                                <div class="card-header h-100 contain flex-md-fill">
+                                    <h5 class="my-0 font-weight-normal title">
+                                        @item.ProductName
+                                    </h5>
+                                </div>
+                                <div class="card-body">
+                                    <h1 class="card-title pricing-card-title">$@item.Price</h1>
+                                    <img class="productIMG" src="@item.ImageURL" />
+                                    <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@item.ID" class="btn btn-lg btn-block btn-outline-primary">Add To Cart</a>
+                                    <a asp-controller="Shop" asp-action="Details" asp-route-id="@item.ID" class="btn btn-sm btn-block btn-outline-primary">View Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                </div>
+            </div>
+        </section>
+
+
+
+
+<footer class="pt-4 my-md-5 pt-md-5 border-top">
+    <div class="row">
+        <div class="col-12 col-md">
+            <img class="mb-2" src="~/asset/VanillaScented.jpg" alt="" width="24" height="24">
+            <small class="d-block mb-3 text-muted">&copy; 2017-2018</small>
+        </div>
+        <div class="col-6 col-md">
+            <h5>Extra</h5>
+            <ul class="list-unstyled text-small">
+                <li><a class="text-muted" href="#">Back to the top</a></li>
+                <li><a class="text-muted" href="#">Admin View</a></li>
+                <li><a class="text-muted" href="#">Idk more links</a></li>
+            </ul>
+        </div>
+        </div>
+</footer>
