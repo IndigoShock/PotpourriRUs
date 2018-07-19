@@ -8,14 +8,14 @@ namespace PuffyAmiYumi.Models
     public class Cart
     {
         public int ID { get; set; }
-        public string UserID { get; set; }
+        public string UserTag { get; set; }
         public bool CheckedOut { get; set; }
-        public List<CartItem> CartItems { get; set; }
+        public List<CartItem> CartItems = new List<CartItem>();
         
-        public Cart()
-        {
-            CartItems = new List<CartItem>();
-        }
+        //public Cart()
+        //{
+        //    CartItems = new List<CartItem>();
+        //}
     }
     
 }

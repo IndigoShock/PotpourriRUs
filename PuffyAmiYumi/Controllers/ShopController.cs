@@ -27,25 +27,31 @@ namespace PuffyAmiYumi.Controllers
             _userManager = userManager;
             _cart = cart;
         }
-        public async Task<IActionResult> AddToCart(int id)
+        [AllowAnonymous]
+        public async Task<IActionResult> MyCart(int id)
         {
             Product product = _context.Products.First(f => f.ID == id);
             var user = await _userManager.FindByEmailAsync(User.Identity.Name);
-            Cart cart = _context.Carts.FirstOrDefault(c => c.UserID == user.Id);
-            if(cart == null)
+            Cart cart = _context.Carts.FirstOrDefault(c => c.UserTag == user.Id);
+            if (cart == null)
             {
                 cart = new Cart();
-                cart.UserID = user.Id;
+                cart.UserTag = user.Id;
+                cart.CartItems = new List<CartItem>();
+                await _context.Carts.AddAsync(cart);
+                await _context.SaveChangesAsync();
             }
             _cart.AddProductToCart(user, cart, product);
-            return RedirectToAction("MyCart", "Shop");
-        }
-        public async Task<IActionResult> MyCart()
-        {
-            var user = await _userManager.FindByEmailAsync(User.Identity.Name);
-            Cart cart = _context.Carts.FirstOrDefault(c => c.UserID == user.Id);
+            await _context.SaveChangesAsync();
+
             return View(cart);
         }
+        //public async Task<IActionResult> MyCart()
+        //{
+        //    var user = await _userManager.FindByEmailAsync(User.Identity.Name);
+        //    Cart cart = _context.Carts.FirstOrDefault(c => c.UserTag == user.Id);
+        //    return View(cart);
+        //}
 
         [AllowAnonymous]
         public async Task<IActionResult> Index()

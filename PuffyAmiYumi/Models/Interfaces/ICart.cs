@@ -7,7 +7,10 @@ namespace PuffyAmiYumi.Models.Interfaces
 {
     public interface ICart
     {
-        List<Product> GetCartItems();
+
+        List<CartItem> GetCartItems(int id);
         Cart AddProductToCart(ApplicationUser user, Cart cart, Product product);
+        Cart GetCart(string id);
+        Product GetProduct(int id);
     }
 }

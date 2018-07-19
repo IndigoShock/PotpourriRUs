@@ -19,14 +19,43 @@ namespace PuffyAmiYumi.Models
         {
             CartItem item = new CartItem();
             item.CartID = cart.ID;
-            item.Product = product;
+            item.ProductID = product.ID;
+            item.ProductName = product.ProductName;
+            
             cart.CartItems.Add(item);
+            _context.CartItems.Add(item);
+            _context.SaveChanges();
+            
             return cart;
         }
-
-        public List<Product> GetCartItems()
+        public Cart GetCart(string id)
         {
-            return _context.Products.OrderByDescending(a => a.ID).ToList();
+            var cart = _context.Carts.FirstOrDefault(x => x.UserTag == id);
+            if(cart == null)
+            {
+                cart = new Cart();
+                cart.UserTag = id;
+                _context.Carts.Add(cart);
+            }
+            cart.CartItems = GetCartItems(cart.ID);
+            _context.SaveChanges();
+            return cart;
+        }
+        public List<CartItem> GetCartItems(int id)
+        {
+            try
+            {
+            var x = _context.CartItems.OrderByDescending(a => a.CartID == id).ToList();
+            }
+            catch(Exception)
+            {
+                return new List<CartItem>();
+            }
+            return _context.CartItems.OrderByDescending(a => a.CartID == id).ToList();
+        }
+        public Product GetProduct(int id)
+        {
+            return _context.Products.First(f => f.ID == id);
         }
     }
 }
