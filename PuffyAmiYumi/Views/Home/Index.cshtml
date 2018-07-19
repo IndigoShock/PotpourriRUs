@@ -5,10 +5,10 @@
     Layout = "_Layout";
 }
 
-@*@if (SignInManager.IsSignedIn(User))
+@if (SignInManager.IsSignedIn(User))
 {
     @await Component.InvokeAsync("Cart")
-}*@
+}
 
 
 

@@ -12,5 +12,7 @@ namespace PuffyAmiYumi.Models
         public bool Purchased { get; set; }
         public int ProductID { get; set; }
         public string ProductName { get; set; }
+        public string ProductIMG { get; set; }
+        public int Quantity { get; set; }
     }
 }
