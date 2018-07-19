@@ -26,12 +26,14 @@ namespace PuffyAmiYumi.Components
 
         public async Task<IViewComponentResult> InvokeAsync(bool purchased)
         {
+            
             var user = await _userManager.FindByEmailAsync(User.Identity.Name);
-
             var userCart = _context.Carts.Where(x => x.UserID == user.Id)
                                          .Include(p => p.CartItems)
                                          .ThenInclude(x => x.Product).First();
+            
             return View(userCart);
+            
         }
     }
 }

@@ -1,8 +1,6 @@
 ﻿@model IEnumerable<Product>
 
 <h4>Here are my products</h4>
-@await Component.InvokeAsync("Cart")
-
 @foreach (Product item in Model)
 {
     <p>item</p>

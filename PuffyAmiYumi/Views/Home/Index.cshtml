@@ -5,7 +5,11 @@
     Layout = "_Layout";
 }
 
-@await Component.InvokeAsync("Cart")
+@*@if (SignInManager.IsSignedIn(User))
+{
+    @await Component.InvokeAsync("Cart")
+}*@
+
 
 
 <h1>Potpourri-R-Us!</h1>
