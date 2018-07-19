@@ -22,18 +22,21 @@ namespace PuffyAmiYumi.Controllers
             _userManager = userManager;
             _signInManager = signInManager;
         }
+
         [HttpGet]
         [AllowAnonymous]
         public IActionResult Index()
         {
             return View();
         }
+
         [AllowAnonymous]
         [HttpGet]
         public IActionResult Register()
         {
             return View();
         }
+
         [AllowAnonymous]
         [HttpGet]
         public IActionResult Login()
@@ -49,7 +52,8 @@ namespace PuffyAmiYumi.Controllers
             if (ModelState.IsValid)
             {
                 List<Claim> claims = new List<Claim>();
-                var user = new ApplicationUser {
+                var user = new ApplicationUser
+                {
                     UserName = rvm.Email,
                     Email = rvm.Email,
                     FirstName = rvm.FirstName,
@@ -78,13 +82,11 @@ namespace PuffyAmiYumi.Controllers
                     await _userManager.AddClaimsAsync(user, claims);
                     await _userManager.AddToRoleAsync(user, ApplicationRoles.Member);
 
-                
                     return RedirectToAction("Login", "Account");
                 }
             }
             return View(rvm);
         }
-
 
         [HttpPost]
         [AllowAnonymous]
@@ -97,9 +99,9 @@ namespace PuffyAmiYumi.Controllers
                 false,
                 lockoutOnFailure: false);
 
-
             var user = await _userManager.FindByEmailAsync(model.Email);
-            if(await _userManager.IsInRoleAsync(user, ApplicationRoles.Admin))
+
+            if (await _userManager.IsInRoleAsync(user, ApplicationRoles.Admin))
             {
                 return RedirectToAction("Index", "Admin");
             }
@@ -108,7 +110,7 @@ namespace PuffyAmiYumi.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
-        
+
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
@@ -116,6 +118,5 @@ namespace PuffyAmiYumi.Controllers
 
             return RedirectToAction("Index", "Home");
         }
-
     }
 }
