@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PuffyAmiYumi.Migrations
 {
-    public partial class addedCarts : Migration
+    public partial class please : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,7 +13,7 @@ namespace PuffyAmiYumi.Migrations
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    UserEmail = table.Column<string>(nullable: true),
+                    UserID = table.Column<string>(nullable: true),
                     CheckedOut = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>

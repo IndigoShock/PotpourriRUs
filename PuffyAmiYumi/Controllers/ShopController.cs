@@ -20,6 +20,7 @@ namespace PuffyAmiYumi.Controllers
         private ICart _cart;
         private UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+
         public ShopController(YumiDbContext context, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, ICart cart)
         {
             _context = context;
@@ -27,12 +28,13 @@ namespace PuffyAmiYumi.Controllers
             _userManager = userManager;
             _cart = cart;
         }
+
         public async Task<IActionResult> AddToCart(int id)
         {
             Product product = _context.Products.First(f => f.ID == id);
             var user = await _userManager.FindByEmailAsync(User.Identity.Name);
             Cart cart = _context.Carts.FirstOrDefault(c => c.UserID == user.Id);
-            if(cart == null)
+            if (cart == null)
             {
                 cart = new Cart();
                 cart.UserID = user.Id;
@@ -40,6 +42,7 @@ namespace PuffyAmiYumi.Controllers
             _cart.AddProductToCart(user, cart, product);
             return RedirectToAction("MyCart", "Shop");
         }
+
         public async Task<IActionResult> MyCart()
         {
             var user = await _userManager.FindByEmailAsync(User.Identity.Name);
@@ -76,7 +79,6 @@ namespace PuffyAmiYumi.Controllers
         {
             return View();
         }
-
 
         [HttpPost]
         [AllowAnonymous]

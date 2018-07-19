@@ -22,7 +22,6 @@ namespace PuffyAmiYumi
                 {
                     StartupDbIntitializer.SeedData(services, userManager);
                 }
-
                 catch (Exception ex)
                 {
                     var logger = services.GetRequiredService<ILogger<Program>>();
@@ -31,6 +30,7 @@ namespace PuffyAmiYumi
             }
             host.Run();
         }
+
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()

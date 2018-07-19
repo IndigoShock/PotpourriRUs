@@ -11,19 +11,17 @@ using System.Threading.Tasks;
 namespace PuffyAmiYumi.Controllers
 {
     [Authorize(Policy = "MemberOnly")]
-
     public class CartController : Controller
     {
         private UserManager<ApplicationUser> _userManager;
         private SignInManager<ApplicationUser> _signInManager;
         private ICart _context;
+
         public CartController(ICart context, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
         {
             _context = context;
             _userManager = userManager;
             _signInManager = signInManager;
         }
-
-
     }
 }

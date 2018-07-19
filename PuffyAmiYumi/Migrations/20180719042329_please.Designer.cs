@@ -10,14 +10,14 @@ using PuffyAmiYumi.Data;
 namespace PuffyAmiYumi.Migrations
 {
     [DbContext(typeof(YumiDbContext))]
-    [Migration("20180717182553_addedCartsAgain")]
-    partial class addedCartsAgain
+    [Migration("20180719042329_please")]
+    partial class please
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.0-rtm-30799")
+                .HasAnnotation("ProductVersion", "2.1.1-rtm-30846")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -29,7 +29,7 @@ namespace PuffyAmiYumi.Migrations
 
                     b.Property<bool>("CheckedOut");
 
-                    b.Property<string>("UserEmail");
+                    b.Property<string>("UserID");
 
                     b.HasKey("ID");
 

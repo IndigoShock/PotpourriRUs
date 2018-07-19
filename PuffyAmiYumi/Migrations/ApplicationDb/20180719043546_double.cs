@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace PuffyAmiYumi.Migrations
+namespace PuffyAmiYumi.Migrations.ApplicationDb
 {
-    public partial class addedCartsAgain : Migration
+    public partial class @double : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
