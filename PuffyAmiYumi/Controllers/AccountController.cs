@@ -58,7 +58,7 @@ namespace PuffyAmiYumi.Controllers
                 };
 
                 Cart cart = new Cart();
-                cart.UserID = user.Id;
+                cart.UserTag = user.Id;
 
                 var result = await _userManager.CreateAsync(user, rvm.Password);
                 if (result.Succeeded)
@@ -76,7 +76,7 @@ namespace PuffyAmiYumi.Controllers
                     claims.Add(emailClaim);
 
                     await _userManager.AddClaimsAsync(user, claims);
-                    //await _userManager.AddToRoleAsync(user, ApplicationRoles.Member);
+                    await _userManager.AddToRoleAsync(user, ApplicationRoles.Member);
 
                 
                     return RedirectToAction("Login", "Account");
@@ -105,9 +105,8 @@ namespace PuffyAmiYumi.Controllers
             }
             else
             {
-                ModelState.AddModelError(string.Empty, "You don't know your credentials");
+                return RedirectToAction("Index", "Home");
             }
-            return View(model);
         }
         
         public async Task<IActionResult> Logout()

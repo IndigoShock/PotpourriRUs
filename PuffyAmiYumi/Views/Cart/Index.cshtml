@@ -1,0 +1,11 @@
+﻿@model PuffyAmiYumi.Models.Cart
+
+
+<h2>@Model</h2>
+@foreach (var item in Model.CartItems)
+{
+    <h2>
+        @item.ProductName
+    </h2>
+
+}

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PuffyAmiYumi.Data;
 
-namespace PuffyAmiYumi.Migrations
+namespace PuffyAmiYumi.Migrations.YumiDb
 {
     [DbContext(typeof(YumiDbContext))]
-    partial class YumiDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180718180519_intial")]
+    partial class intial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -27,7 +29,7 @@ namespace PuffyAmiYumi.Migrations
 
                     b.Property<bool>("CheckedOut");
 
-                    b.Property<string>("UserID");
+                    b.Property<string>("UserTag");
 
                     b.HasKey("ID");
 
@@ -40,9 +42,7 @@ namespace PuffyAmiYumi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CartID");
-
-                    b.Property<int?>("CartID1");
+                    b.Property<int>("CartID");
 
                     b.Property<int?>("ProductID");
 
@@ -50,7 +50,7 @@ namespace PuffyAmiYumi.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("CartID1");
+                    b.HasIndex("CartID");
 
                     b.HasIndex("ProductID");
 
@@ -95,7 +95,8 @@ namespace PuffyAmiYumi.Migrations
                 {
                     b.HasOne("PuffyAmiYumi.Models.Cart")
                         .WithMany("CartItems")
-                        .HasForeignKey("CartID1");
+                        .HasForeignKey("CartID")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("PuffyAmiYumi.Models.Product", "Product")
                         .WithMany()

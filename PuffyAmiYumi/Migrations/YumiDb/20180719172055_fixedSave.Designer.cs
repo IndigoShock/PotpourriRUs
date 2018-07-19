@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PuffyAmiYumi.Data;
 
-namespace PuffyAmiYumi.Migrations
+namespace PuffyAmiYumi.Migrations.YumiDb
 {
     [DbContext(typeof(YumiDbContext))]
-    [Migration("20180717234245_addedUserID")]
-    partial class addedUserID
+    [Migration("20180719172055_fixedSave")]
+    partial class fixedSave
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -29,7 +29,7 @@ namespace PuffyAmiYumi.Migrations
 
                     b.Property<bool>("CheckedOut");
 
-                    b.Property<string>("UserID");
+                    b.Property<string>("UserTag");
 
                     b.HasKey("ID");
 
@@ -42,9 +42,7 @@ namespace PuffyAmiYumi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CartID");
-
-                    b.Property<int?>("CartID1");
+                    b.Property<int>("CartID");
 
                     b.Property<int?>("ProductID");
 
@@ -52,11 +50,9 @@ namespace PuffyAmiYumi.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("CartID1");
-
                     b.HasIndex("ProductID");
 
-                    b.ToTable("CartItem");
+                    b.ToTable("CartItems");
                 });
 
             modelBuilder.Entity("PuffyAmiYumi.Models.Product", b =>
@@ -95,10 +91,6 @@ namespace PuffyAmiYumi.Migrations
 
             modelBuilder.Entity("PuffyAmiYumi.Models.CartItem", b =>
                 {
-                    b.HasOne("PuffyAmiYumi.Models.Cart")
-                        .WithMany("CartItems")
-                        .HasForeignKey("CartID1");
-
                     b.HasOne("PuffyAmiYumi.Models.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductID");
