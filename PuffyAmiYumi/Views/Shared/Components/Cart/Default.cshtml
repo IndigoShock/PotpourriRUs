@@ -1,7 +1,8 @@
-﻿@model IEnumerable<Product>
+﻿@model Cart
 
-<h4>Here are my products</h4>
-@foreach (Product item in Model)
+<h4>My Cart</h4>
+@foreach (CartItem item in Model.CartItems)
 {
-    <p>item</p>
+    <p>@item.ProductName</p>
+    <p></p>
 }
