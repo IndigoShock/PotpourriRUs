@@ -15,6 +15,13 @@ namespace PuffyAmiYumi.Models
             _context = context;
         }
 
+        /// <summary>
+        /// Takes in the 3 parameters and combines them into one object, known as the CartItem
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="cart"></param>
+        /// <param name="product"></param>
+        /// <returns>the Cart, which is attached to a User, and it is full of Prducts/CartItems</returns>
         public Cart AddProductToCart(ApplicationUser user, Cart cart, Product product)
         {
             CartItem item = new CartItem();
@@ -32,6 +39,12 @@ namespace PuffyAmiYumi.Models
             
             return cart;
         }
+
+        /// <summary>
+        /// Grabs the cart associated with the specific User
+        /// </summary>
+        /// <param name="id">The UserTag, an ID from a User</param>
+        /// <returns>Cart, has a UserID from the param, if the User doesn't have an existing cart it creates one</returns>
         public Cart GetCart(string id)
         {
             var cart = _context.Carts.FirstOrDefault(x => x.UserTag == id);
@@ -45,6 +58,12 @@ namespace PuffyAmiYumi.Models
             _context.SaveChanges();
             return cart;
         }
+
+        /// <summary>
+        /// Grabs the CartItems that are associated with a specific CartID
+        /// </summary>
+        /// <param name="id">A CartID</param>
+        /// <returns>List of CartItems</returns>
         public List<CartItem> GetCartItems(int id)
         {
             try
@@ -57,11 +76,20 @@ namespace PuffyAmiYumi.Models
             }
             return _context.CartItems.OrderByDescending(a => a.CartID == id).ToList();
         }
+
+        /// <summary>
+        /// In order to create a CartItem we must attach a product with that CartItem, here we grab the product
+        /// </summary>
+        /// <param name="id"> a product ID</param>
+        /// <returns>Product</returns>
         public Product GetProduct(int id)
         {
             return _context.Products.First(f => f.ID == id);
         }
-
+        /// <summary>
+        /// Deletes a specific CartItem from a specific Cart
+        /// </summary>
+        /// <param name="id">Id of a cartItem</param>
         public void DeleteCartItem(int id)
         {
             var item = _context.CartItems.FirstOrDefault(f => f.ID == id);
