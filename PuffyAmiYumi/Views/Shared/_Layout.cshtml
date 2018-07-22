@@ -19,7 +19,7 @@
 
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" asp-controller="Product" asp-action="ViewAllProducts">Products</a>
+                <a class="nav-link" asp-controller="Shop" asp-action="Index">Products</a>
             </li>
         </ul>
         <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
@@ -27,8 +27,8 @@
                 @if (SignInManager.IsSignedIn(User))
                 {
                     <li class="cart-icon">
-                        <a asp-controller="Shop" asp-action="MyCart">
-                            <img src="~/asset/CartIcon.jpg" />
+                        <a asp-controller="Shop" asp-action="Index">
+                            <img src="~/asset/CartIcon.jpg" id="cart-icon" />
                         </a>
                     </li>
                     <li class="userName">
@@ -39,7 +39,7 @@
                 {
                     <li class="cart-icon">
                         <a asp-controller="Account" asp-action="Login">
-                            <img src="~/asset/CartIcon.jpg" />
+                            <img id="cart-icon" src="~/asset/CartIcon.jpg" />
                         </a>
                     </li>
                     <li class="nav-item login">

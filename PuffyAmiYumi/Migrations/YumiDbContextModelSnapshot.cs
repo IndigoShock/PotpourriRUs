@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PuffyAmiYumi.Data;
 
-namespace PuffyAmiYumi.Migrations.YumiDb
+namespace PuffyAmiYumi.Migrations
 {
     [DbContext(typeof(YumiDbContext))]
     partial class YumiDbContextModelSnapshot : ModelSnapshot
@@ -41,11 +41,17 @@ namespace PuffyAmiYumi.Migrations.YumiDb
 
                     b.Property<int>("CartID");
 
+                    b.Property<decimal>("Price");
+
                     b.Property<int>("ProductID");
+
+                    b.Property<string>("ProductIMG");
 
                     b.Property<string>("ProductName");
 
                     b.Property<bool>("Purchased");
+
+                    b.Property<int>("Quantity");
 
                     b.HasKey("ID");
 

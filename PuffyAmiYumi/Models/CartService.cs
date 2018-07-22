@@ -21,6 +21,10 @@ namespace PuffyAmiYumi.Models
             item.CartID = cart.ID;
             item.ProductID = product.ID;
             item.ProductName = product.ProductName;
+            item.ProductIMG = product.ImageURL;
+            item.Quantity++;
+            item.Price = product.Price;
+            
             
             cart.CartItems.Add(item);
             _context.CartItems.Add(item);
@@ -56,6 +60,13 @@ namespace PuffyAmiYumi.Models
         public Product GetProduct(int id)
         {
             return _context.Products.First(f => f.ID == id);
+        }
+
+        public void DeleteCartItem(int id)
+        {
+            var item = _context.CartItems.FirstOrDefault(f => f.ID == id);
+            _context.CartItems.Remove(item);
+            _context.SaveChanges();
         }
     }
 }

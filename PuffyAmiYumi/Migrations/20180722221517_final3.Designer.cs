@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PuffyAmiYumi.Data;
 
-namespace PuffyAmiYumi.Migrations.YumiDb
+namespace PuffyAmiYumi.Migrations
 {
     [DbContext(typeof(YumiDbContext))]
-    [Migration("20180719180049_fixedSave2")]
-    partial class fixedSave2
+    [Migration("20180722221517_final3")]
+    partial class final3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -43,11 +43,17 @@ namespace PuffyAmiYumi.Migrations.YumiDb
 
                     b.Property<int>("CartID");
 
+                    b.Property<decimal>("Price");
+
                     b.Property<int>("ProductID");
+
+                    b.Property<string>("ProductIMG");
 
                     b.Property<string>("ProductName");
 
                     b.Property<bool>("Purchased");
+
+                    b.Property<int>("Quantity");
 
                     b.HasKey("ID");
 
