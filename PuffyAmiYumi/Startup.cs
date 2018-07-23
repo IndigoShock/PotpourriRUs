@@ -68,8 +68,7 @@ namespace PuffyAmiYumi
                 })
                 .AddGoogle(googleOptions =>
                 {
-                    googleOptions.ClientId = Configuration
-                    ["Authentication:Google:ClientId"];
+                    googleOptions.ClientId = Configuration["Authentication:Google:ClientId"];
                     googleOptions.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
                 });
 
