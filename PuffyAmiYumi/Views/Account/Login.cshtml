@@ -2,17 +2,48 @@
 @{
     Layout = "_Layout";
 }
-<body>
 
-    
-<main>
-    <div class="card-img-overlay login-div">
-        <form class="card-form" asp-controller="Account" asp-action="Login">
-            <h4 class="card-text"> Login </h4>
-            <input type="text" placeholder="Email" name="Email" />
-            <input type="password" placeholder="Password" name="Password" />
-            <br /><button type="submit" class="btn btn-outline-primary text-dark">Log In</button>
-        </form>
-    </div>
-</main>
+<body>
+    <main>
+        <div class="card-img-overlay login-div">
+            <form class="card-form" asp-controller="Account" asp-action="Login">
+                <h4 class="card-text"> Login </h4>
+                <input type="text" placeholder="Email" name="Email" />
+                <input type="password" placeholder="Password" name="Password" />
+                <br /><button type="submit" class="btn btn-outline-primary text-dark">Log In</button>
+            </form>
+        </div>
+        <section>
+        <div>
+        <h2>Login With an External Account</h2>
+        @{
+            var loginProviders1 = (await SignInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            if (loginProviders1.Count > 0)
+            {
+                <div class="col-md-4">
+                    <div class="row">
+                        <form asp-action="ExternalLogin" method="post" class="form-horizontal">
+                            @foreach (var provider in loginProviders1)
+                            {
+                                <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name"
+                                        title="Log in using your @provider.DisplayName account">
+                                    @if (provider.DisplayName == "Microsoft")
+                                    {
+                                        <img src="~/asset/windowsIcon.png" class="SMicon" title="microsoft logo" />
+                                    }
+                                    else if (provider.DisplayName == "Google")
+                                    {
+                                        <img src="~/asset/googleIcon.png" class="SMicon" title="google logo" />
+                                    }
+                                    @provider.Name
+                                </button><hr />
+                            }
+                        </form>
+                    </div>
+                </div>
+            }
+        }
+            </div>
+            </section>
+    </main>
 </body>

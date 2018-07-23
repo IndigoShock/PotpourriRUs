@@ -12,5 +12,6 @@ namespace PuffyAmiYumi.Models.Interfaces
         Cart AddProductToCart(ApplicationUser user, Cart cart, Product product);
         Cart GetCart(string id);
         Product GetProduct(int id);
+        void DeleteCartItem(int id);
     }
 }

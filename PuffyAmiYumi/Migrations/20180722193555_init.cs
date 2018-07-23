@@ -1,12 +1,31 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace PuffyAmiYumi.Migrations.YumiDb
+namespace PuffyAmiYumi.Migrations
 {
-    public partial class intial : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "CartItems",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    CartID = table.Column<int>(nullable: false),
+                    Purchased = table.Column<bool>(nullable: false),
+                    ProductID = table.Column<int>(nullable: false),
+                    ProductName = table.Column<string>(nullable: true),
+                    ProductIMG = table.Column<string>(nullable: true),
+                    Quantity = table.Column<int>(nullable: false),
+                    Price = table.Column<decimal>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CartItems", x => x.ID);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Carts",
                 columns: table => new
@@ -38,33 +57,6 @@ namespace PuffyAmiYumi.Migrations.YumiDb
                     table.PrimaryKey("PK_Products", x => x.ID);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "CartItem",
-                columns: table => new
-                {
-                    ID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    CartID = table.Column<int>(nullable: false),
-                    Purchased = table.Column<bool>(nullable: false),
-                    ProductID = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CartItem", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_CartItem_Carts_CartID",
-                        column: x => x.CartID,
-                        principalTable: "Carts",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_CartItem_Products_ProductID",
-                        column: x => x.ProductID,
-                        principalTable: "Products",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
             migrationBuilder.InsertData(
                 table: "Products",
                 columns: new[] { "ID", "ImageURL", "Price", "ProductName", "SKU", "Stock" },
@@ -81,22 +73,12 @@ namespace PuffyAmiYumi.Migrations.YumiDb
                     { 9, "asset/MorningBlossom.jpg", 12.99m, "Esscents-Morning-Blossom-Potpourri", null, 100 },
                     { 10, "asset/JasmineTea.jpg", 12.99m, "Esscents-Jasmine-Tea-Potpourri", null, 100 }
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CartItem_CartID",
-                table: "CartItem",
-                column: "CartID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CartItem_ProductID",
-                table: "CartItem",
-                column: "ProductID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "CartItem");
+                name: "CartItems");
 
             migrationBuilder.DropTable(
                 name: "Carts");

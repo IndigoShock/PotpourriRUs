@@ -23,23 +23,19 @@ namespace PuffyAmiYumi.Controllers
             _signInManager = signInManager;
         }
 
-        //public async Task<IActionResult> MyCart(int id)
+        //[AllowAnonymous]
+        //public async Task<IActionResult> Update(int id)
         //{
-        //    Product product = _context.Products.First(f => f.ID == id);
-        //    var user = await _userManager.FindByEmailAsync(User.Identity.Name);
-        //    Cart cart = _context.Carts.FirstOrDefault(c => c.UserTag == user.Id);
-        //    if (cart == null)
-        //    {
-        //        cart = new Cart();
-        //        cart.UserTag = user.Id;
-        //        cart.CartItems = new List<CartItem>();
-        //        await _context.Carts.AddAsync(cart);
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    await _cart.AddProductToCart(user, cart, product);
-        //    await _context.SaveChangesAsync();
 
-        //    return View(cart);
+        //}
+        [AllowAnonymous]
+        public IActionResult Delete(int id)
+        {
+            _context.DeleteCartItem(id);
+            return View("Index");
+        }
+
+
         [AllowAnonymous]
         public async Task<IActionResult> Index(int id)
         {

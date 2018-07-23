@@ -43,6 +43,112 @@ namespace PuffyAmiYumi.Controllers
         {
             return View();
         }
+        private IActionResult RedirectToLocal(string returnURL)
+        {
+            if (Url.IsLocalUrl(returnURL))
+            {
+                return Redirect(returnURL);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+        }
+        [HttpPost]
+        [AllowAnonymous]
+        public IActionResult ExternalLogin(string provider)
+        {
+            var redirectUrl = Url.Action("ExternalLoginCallback", "Account");
+            var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
+            return Challenge(properties, provider);
+        }
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> ExternalLoginCallback(string remoteError)
+        {
+            if (remoteError != null)
+            {
+                TempData["ErrorMessage"] = "Error from Provider";
+                return RedirectToAction("Login");
+            }
+
+            //Checking to see if the web app supports that external login async. 
+            var info = await _signInManager.GetExternalLoginInfoAsync();
+
+            if (info == null)
+            {
+                return RedirectToAction("Login");
+            }
+
+            // sign the user in with the external login. See if the user has used this external login provider previously. 
+            var result = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey,
+                isPersistent: false, bypassTwoFactor: true);
+
+            if (result.Succeeded)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            //get the email if this is the first time
+            var email = info.Principal.FindFirstValue(ClaimTypes.Email);
+            var firstName = info.Principal.FindFirstValue(ClaimTypes.GivenName);
+            string lastName = info.Principal.FindFirstValue(ClaimTypes.Surname);
+
+
+
+            //redirect to the external login page for the user to 
+            return View("ExternalLogin", new ExternalLoginViewModel { Email = email, FirstName = firstName, LastName = lastName});
+        }
+        [AllowAnonymous]
+        [HttpPost]
+        public async Task<IActionResult> ExternalLoginConfirmation(ExternalLoginViewModel elvm)
+        {
+            if (ModelState.IsValid)
+            {
+                var info = await _signInManager.GetExternalLoginInfoAsync();
+                if (info == null)
+                {
+                    TempData["Error"] = "Error loading information";
+                }
+
+                //Create the user.
+                //TODO: Could potentially force the user to add a password here....
+                //
+                var user = new ApplicationUser { UserName = elvm.Email, Email = elvm.Email, FirstName = elvm.FirstName, LastName = elvm.LastName };
+
+                var result = await _userManager.CreateAsync(user);
+
+                if (result.Succeeded)
+                {
+                    List<Claim> claims = new List<Claim>();
+                    //TODO: Potentially add Claims here.....
+                    Claim nameClaim = new Claim("Name", $"{user.FirstName} {user.LastName}");
+                    Claim birthdayClaim = new Claim(ClaimTypes.DateOfBirth,
+                        new DateTime(user.Birthday.Year,
+                        user.Birthday.Month,
+                        user.Birthday.Day).ToString("u"),
+                        ClaimValueTypes.DateTime);
+                    Claim emailClaim = new Claim(ClaimTypes.Email, user.Email, ClaimValueTypes.Email);
+                    claims.Add(nameClaim);
+                    claims.Add(birthdayClaim);
+                    claims.Add(emailClaim);
+
+                    await _userManager.AddClaimsAsync(user, claims);
+                    await _userManager.AddToRoleAsync(user, ApplicationRoles.Member);
+                    result = await _userManager.AddLoginAsync(user, info);
+
+                    if (result.Succeeded)
+                    {
+                        // sign the user in with the information they gave us
+                        await _signInManager.SignInAsync(user, isPersistent: false);
+                        return RedirectToAction("Index", "Home");
+
+                    }
+                }
+            }
+            return View(elvm);
+        }
+
 
         [AllowAnonymous]
         [HttpPost]

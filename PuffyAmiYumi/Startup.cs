@@ -60,6 +60,13 @@ namespace PuffyAmiYumi
                 options.AddPolicy("MemberOnly", policy => policy.RequireRole(ApplicationRoles.Member));
             });
 
+            services.AddAuthentication()
+                .AddMicrosoftAccount(microsoftOptions =>
+                {
+                    microsoftOptions.ClientId = Configuration["Authentication:Microsoft:ApplicationId"];
+                    microsoftOptions.ClientSecret = Configuration["Authentication:Microsoft:Password"];
+                });
+
             services.AddScoped<IInventory, DevInven>();
             services.AddScoped<ICart, CartService>();
         }
@@ -71,6 +78,7 @@ namespace PuffyAmiYumi
             {
                 app.UseDeveloperExceptionPage();
             }
+
             app.UseAuthentication();
             app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
