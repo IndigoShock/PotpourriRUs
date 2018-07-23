@@ -23,18 +23,24 @@ namespace PuffyAmiYumi.Controllers
             _signInManager = signInManager;
         }
 
-        //[AllowAnonymous]
-        //public async Task<IActionResult> Update(int id)
-        //{
-
-        //}
         [AllowAnonymous]
         public IActionResult Delete(int id)
         {
             _context.DeleteCartItem(id);
             return View("Index");
         }
-
+        /// <summary>
+        /// Brings user to Checkout Page
+        /// </summary>
+        /// <param name="id">Takes in a CartID</param>
+        /// <returns>View</returns>
+        [AllowAnonymous]
+        public async Task<IActionResult> Checkout(string id)
+        {
+            var user = await _userManager.FindByEmailAsync(User.Identity.Name);
+            Cart cart = _context.GetCart(user.Id);
+            return View(cart);
+        }
 
         [AllowAnonymous]
         public async Task<IActionResult> Index(int id)
