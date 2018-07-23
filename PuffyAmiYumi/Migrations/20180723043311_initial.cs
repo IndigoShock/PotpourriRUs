@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace PuffyAmiYumi.Migrations.YumiDb
+namespace PuffyAmiYumi.Migrations
 {
     public partial class initial : Migration
     {
@@ -16,7 +16,10 @@ namespace PuffyAmiYumi.Migrations.YumiDb
                     CartID = table.Column<int>(nullable: false),
                     Purchased = table.Column<bool>(nullable: false),
                     ProductID = table.Column<int>(nullable: false),
-                    ProductName = table.Column<string>(nullable: true)
+                    ProductName = table.Column<string>(nullable: true),
+                    ProductIMG = table.Column<string>(nullable: true),
+                    Quantity = table.Column<int>(nullable: false),
+                    Price = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
                 {

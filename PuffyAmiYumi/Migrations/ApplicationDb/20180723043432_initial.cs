@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace PuffyAmiYumi.Migrations
+namespace PuffyAmiYumi.Migrations.ApplicationDb
 {
     public partial class initial : Migration
     {
