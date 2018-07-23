@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PuffyAmiYumi.Data;
 
 namespace PuffyAmiYumi.Migrations
 {
     [DbContext(typeof(YumiDbContext))]
-    partial class YumiDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180723170859_plswork2")]
+    partial class plswork2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -58,46 +60,6 @@ namespace PuffyAmiYumi.Migrations
                     b.ToTable("CartItems");
                 });
 
-            modelBuilder.Entity("PuffyAmiYumi.Models.Order", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<decimal>("Total");
-
-                    b.Property<int>("UserID");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Orders");
-                });
-
-            modelBuilder.Entity("PuffyAmiYumi.Models.OrderItems", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("ItemID");
-
-                    b.Property<string>("ItemName");
-
-                    b.Property<int>("OrderID");
-
-                    b.Property<decimal>("Price");
-
-                    b.Property<int>("Quantity");
-
-                    b.Property<decimal>("TotalCost");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("OrderID");
-
-                    b.ToTable("OrderItems");
-                });
-
             modelBuilder.Entity("PuffyAmiYumi.Models.Product", b =>
                 {
                     b.Property<int>("ID")
@@ -130,14 +92,6 @@ namespace PuffyAmiYumi.Migrations
                         new { ID = 9, ImageURL = "asset/MorningBlossom.jpg", Price = 12.99m, ProductName = "Esscents-Morning-Blossom-Potpourri", Stock = 100 },
                         new { ID = 10, ImageURL = "asset/JasmineTea.jpg", Price = 12.99m, ProductName = "Esscents-Jasmine-Tea-Potpourri", Stock = 100 }
                     );
-                });
-
-            modelBuilder.Entity("PuffyAmiYumi.Models.OrderItems", b =>
-                {
-                    b.HasOne("PuffyAmiYumi.Models.Order")
-                        .WithMany("Products")
-                        .HasForeignKey("OrderID")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }
