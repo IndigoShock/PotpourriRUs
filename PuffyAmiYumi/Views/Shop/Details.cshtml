@@ -3,6 +3,12 @@
 @{
     Layout = "_Layout";
 }
+
+@if (SignInManager.IsSignedIn(User))
+{
+    @await Component.InvokeAsync("Cart")
+}
+
 <main>
     <section>
         <div class="row mb-2">
@@ -20,8 +26,8 @@
                     <img class="card-img-right flex-auto d-none d-lg-block" src="@Model.ImageURL" alt="Product">
                 </div>
             </div>
-         </div>
-</section>
+        </div>
+    </section>
 </main>
 
 <div>
