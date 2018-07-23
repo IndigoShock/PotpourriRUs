@@ -27,3 +27,20 @@ This application is created using ASP.NET Core 2.1 Web Application <br />
 **Week One** <br />
 *Monday* - Scaffold files, deployed to azure, implemented seed data, Set up databases<br />
 *Tuesday* - Created Homepage, Login Page, Register Account Page, Implemented Identity
+*Wednesday* - <br /> 
+*Thursday* - <br />
+*Friday* - <br />
+
+**Week Two** <br />
+*Monday* - <br />
+*Tuesday* - <br />
+*Wednesday* - <br />
+*Thursday* - <br />
+*Friday* - Day was taken off for Career Development Day.
+
+**Week Three** <br />
+*Monday* - TBD <br />
+*Tuesday* - TBD <br />
+*Wednesday* - TBD <br />
+*Thursday* - TBD <br />
+*Friday* - TBD <br />
