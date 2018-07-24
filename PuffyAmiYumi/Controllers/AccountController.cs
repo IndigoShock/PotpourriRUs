@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using PuffyAmiYumi.Models;
 using PuffyAmiYumi.Models.ViewModel;
@@ -16,11 +17,13 @@ namespace PuffyAmiYumi.Controllers
     {
         private UserManager<ApplicationUser> _userManager;
         private SignInManager<ApplicationUser> _signInManager;
+        private IEmailSender _emailSender;
 
-        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IEmailSender emailSender)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _emailSender = emailSender;
         }
 
         [HttpGet]
@@ -187,6 +190,13 @@ namespace PuffyAmiYumi.Controllers
 
                     await _userManager.AddClaimsAsync(user, claims);
                     await _userManager.AddToRoleAsync(user, ApplicationRoles.Member);
+
+                    await _emailSender.SendEmailAsync(user.Email, "Welcome to Potpourri-R-Us", "" +
+                        "<h1>Thank you for registering with Potpourri-R-Us!</h1>" +
+                        "<br/>" +
+                        "<p>We here at Potpourri-R-Us are about experiences. We are passionate about our products. The aroma of calming lavender? The nostalgic feeling of vanilla? We have it! " +
+                        "<a href='https://puffyamiyumiapp.azurewebsites.net'> Come on in!</a>" +
+                        "</p>");
 
                     return RedirectToAction("Login", "Account");
                 }

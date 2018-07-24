@@ -1,31 +1,33 @@
-﻿//using Microsoft.Extensions.Configuration;
-//using System.Threading.Tasks;
-//using SendGrid;
-//using SendGrid.Helpers.Mail;
+﻿using Microsoft.Extensions.Configuration;
+using System.Threading.Tasks;
+using SendGrid;
+using SendGrid.Helpers.Mail;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
-//namespace PuffyAmiYumi.Models
-////: IEmailSender
-//{
-//    public class EmailSender
-//    {
-//        private IConfiguration Configuration { get; }
+namespace PuffyAmiYumi.Models
+{
+    public class EmailSender : IEmailSender
+    {
+        private IConfiguration Configuration { get; }
 
-//        public EmailSender(IConfiguration configuration)
-//        {
-//        Configuration = configuration;
-//        }
+        public EmailSender(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
 
-//        public Task SendEmailAsync(string email, string subject, string htmlMessage)
-//        {
-//        var msg = new SendGridMessage();
+        public async Task SendEmailAsync(string email, string subject, string htmlMessage)
+        {
+            var client = new SendGridClient(Configuration["Api_Key"]);
 
-//        msg.SetFrom("admin@busmall.com", "Bus Mall Admin");
+            var msg = new SendGridMessage();
 
-//        msg.AddTo(email);
-//        msg.SetSubject(subject);
-//        msg.AddContent(Mimetype.Html, htmlMessage);
+            msg.SetFrom("stephendeanharper@gmail.com", "Potpourri-R-Us Admin");
 
-//        var client = new SendGridClient(Configuration["SendGrid: Api_Key"]);
-//        }
-//    }
-//}
+            msg.AddTo(email);
+            msg.SetSubject(subject);
+            msg.AddContent(MimeType.Html, htmlMessage);
+
+            var response = await client.SendEmailAsync(msg);
+        }
+    }
+}
