@@ -10,6 +10,6 @@ namespace PuffyAmiYumi.Models.Interfaces
     {
         Task<Order> PopulateOrderProducts(Cart cart, Order order);
         void NewOrder(Order order);
-
+        Task<Order> SaveOrder(Order order);
     }
 }

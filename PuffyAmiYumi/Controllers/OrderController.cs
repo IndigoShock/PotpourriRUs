@@ -15,23 +15,32 @@ namespace PuffyAmiYumi.Controllers
     {
         private UserManager<ApplicationUser> _userManager;
         private SignInManager<ApplicationUser> _signInManager;
+        private ICart _cart;
         private IDevCheckout _context;
-        public OrderController(IDevCheckout context, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        public OrderController(IDevCheckout context, ICart cart, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
         {
+            _cart = cart;
             _context = context;
             _userManager = userManager;
             _signInManager = signInManager;
         }
 
-        //public IActionResult Index(Cart cart)
-        //{
-
-        //    Order order = _context.NewOrder(cart).Result;
-        //    return RedirectToAction("Shipping", order);
-        //}
+        [AllowAnonymous]
         public IActionResult Shipping(Order order)
         {
             return View(order);
+        }
+
+        [AllowAnonymous]
+        public async Task<IActionResult> FinalizeOrder(Order order)
+        {
+            
+            var user = await _userManager.FindByEmailAsync(User.Identity.Name);
+            Cart cart = _cart.GetCart(user.Id);
+            await _context.PopulateOrderProducts(cart, order);
+            await _context.SaveOrder(order);
+            await _cart.EmptyCart(cart);
+            return View("ThankYou");
         }
 
     }

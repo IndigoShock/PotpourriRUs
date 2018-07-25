@@ -96,5 +96,15 @@ namespace PuffyAmiYumi.Models
             _context.CartItems.Remove(item);
             _context.SaveChanges();
         }
+        public async Task<Cart> EmptyCart(Cart cart)
+        {
+            foreach(CartItem item in cart.CartItems)
+            {
+                _context.CartItems.Remove(item);
+            }
+            cart.CartItems = new List<CartItem>();
+            await _context.SaveChangesAsync();
+            return cart;
+        }
     }
 }
