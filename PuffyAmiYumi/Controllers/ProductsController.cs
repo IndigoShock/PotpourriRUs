@@ -50,7 +50,7 @@ namespace PuffyAmiYumi.Controllers
             {
                 return NotFound();
             }
-            var product = await _context.GetProductByID(id);
+            var product = _context.GetProductById(id);
             if (product == null)
             {
                 return NotFound();
@@ -78,7 +78,7 @@ namespace PuffyAmiYumi.Controllers
             {
                 return NotFound();
             }
-            var product = await _context.GetProductByID(id);
+            var product = _context.GetProductById(id);
             if (product == null)
             {
                 return NotFound();
@@ -86,9 +86,10 @@ namespace PuffyAmiYumi.Controllers
             return View(product);
         }
 
+        //GET: Products/Edit/5
         [HttpPost("/admin/products/Edit")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID, ProductName,Price,Stock,ImageUrl")] Product product)
+        public IActionResult Edit(int id, [Bind("ID, ProductName,Price,Stock,ImageUrl")] Product product)
         {
             if (id != product.ID)
             {
@@ -99,7 +100,7 @@ namespace PuffyAmiYumi.Controllers
             {
                 try
                 {
-                    await _context.UpdateProduct(id, product);
+                    _context.UpdateProduct(product);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -117,15 +118,13 @@ namespace PuffyAmiYumi.Controllers
             return View(product);
         }
 
-        // GET: Products/Delete/5
-        //[HttpGet("/admin/products/Delete")]
-        //public async Task<IActionResult> Delete(int id)
-        //{
-        //    Product product = await _context.GetProductByID(id);
-
-        //    await _context.DeleteProduct(product.ID);
-
-        //    return RedirectToAction("Index", "Admin");
-        //}
+        //GET: Products/Delete/5
+        [HttpGet("/admin/products/Delete")]
+        public IActionResult Delete(int id)
+        {
+            var product = _context.GetProductById(id);
+            _context.DeleteProduct(product.ID);
+            return RedirectToAction("Index", "Admin");
+        }
     }
 }

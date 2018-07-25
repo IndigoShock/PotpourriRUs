@@ -17,9 +17,11 @@ namespace PuffyAmiYumi.Models
             _context = context;
         }
 
-        public Task<IActionResult> CreateProduct(Product product)
+        public async Task<Product> CreateProduct(Product product)
         {
-            throw new NotImplementedException();
+            await _context.Products.AddAsync(product);
+            await _context.SaveChangesAsync();
+            return product;
         }
 
         public List<Product> GetProduct()
@@ -28,19 +30,20 @@ namespace PuffyAmiYumi.Models
             return makeList;
         }
 
-        public Task<IActionResult> GetProductByID(int ID)
+        public Product GetProductById(int? id) => _context.Products.Single<Product>(p => p.ID == id);
+
+        public void UpdateProduct(Product product)
         {
-            throw new NotImplementedException();
+            
+            _context.Products.Update(product);
+            _context.SaveChanges();
         }
 
-        public Task<IActionResult> UpdateProduct(int ID, Product product)
+        public void DeleteProduct(int id)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<IActionResult> DeleteProduct(int ID)
-        {
-            throw new NotImplementedException();
+            Product product = _context.Products.Single(p => p.ID == id);
+            _context.Products.Remove(product);
+            _context.SaveChangesAsync();
         }
     }
 }
