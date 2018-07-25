@@ -76,6 +76,7 @@ namespace PuffyAmiYumi
             services.AddScoped<IInventory, DevInven>();
             services.AddScoped<ICart, CartService>();
             services.AddScoped<IEmailSender, EmailSender>();
+            services.AddScoped<IDevCheckout, DevCheckout>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

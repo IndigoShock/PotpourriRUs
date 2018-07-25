@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PuffyAmiYumi.Data;
 
 namespace PuffyAmiYumi.Migrations
 {
     [DbContext(typeof(YumiDbContext))]
-    partial class YumiDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180724182710_addedOrders")]
+    partial class addedOrders
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -68,15 +70,11 @@ namespace PuffyAmiYumi.Migrations
 
                     b.Property<string>("City");
 
-                    b.Property<string>("Country");
-
                     b.Property<string>("CreditCard");
 
                     b.Property<string>("Email");
 
                     b.Property<string>("FullName");
-
-                    b.Property<string>("NameOnCard");
 
                     b.Property<string>("PhoneNumber");
 

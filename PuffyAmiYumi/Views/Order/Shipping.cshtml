@@ -1,0 +1,11 @@
+﻿@model PuffyAmiYumi.Models.Order
+
+@{
+    Layout = "_Layout";
+}
+
+@foreach(OrderItems item in Model.Products)
+{
+    <p>@item.ItemName</p>
+
+}

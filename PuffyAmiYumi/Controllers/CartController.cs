@@ -32,18 +32,19 @@ namespace PuffyAmiYumi.Controllers
         /// <summary>
         /// Brings user to Checkout Page
         /// </summary>
-        /// <param name="id">Takes in a CartID</param>
+        /// <param name="id">Takes in a Cart</param>
         /// <returns>View</returns>
         [AllowAnonymous]
-        public async Task<IActionResult> Checkout(string id)
+        public async Task<IActionResult> Checkout()
         {
             var user = await _userManager.FindByEmailAsync(User.Identity.Name);
+
             Cart cart = _context.GetCart(user.Id);
-            return View(cart);
+            return RedirectToAction("Index", "Order", cart);
         }
 
         [AllowAnonymous]
-        public async Task<IActionResult> Index(int id)
+        public async Task<IActionResult> Index()
         {
             var user = await _userManager.FindByEmailAsync(User.Identity.Name);
 
