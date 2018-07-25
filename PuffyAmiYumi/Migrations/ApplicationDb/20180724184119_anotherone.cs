@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PuffyAmiYumi.Migrations.ApplicationDb
 {
-    public partial class initial : Migration
+    public partial class anotherone : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

@@ -10,8 +10,8 @@ using PuffyAmiYumi.Data;
 namespace PuffyAmiYumi.Migrations.ApplicationDb
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180723043432_initial")]
-    partial class initial
+    [Migration("20180724184119_anotherone")]
+    partial class anotherone
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

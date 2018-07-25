@@ -17,7 +17,7 @@ namespace PuffyAmiYumi.Models
 
         public async Task SendEmailAsync(string email, string subject, string htmlMessage)
         {
-            var client = new SendGridClient(Configuration["Api_Key"]);
+            var client = new SendGridClient(Configuration["SendGrid:Api_Key"]);
 
             var msg = new SendGridMessage();
 
