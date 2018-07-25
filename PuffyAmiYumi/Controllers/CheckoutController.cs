@@ -43,13 +43,12 @@ namespace PuffyAmiYumi.Controllers
         public async Task<IActionResult> GetOrderInformation(Order order)
         {
             var user = await _userManager.FindByEmailAsync(User.Identity.Name);
-
+            
             Cart cart = _cart.GetCart(user.Id);
             await _context.PopulateOrderProducts(cart, order);
             return RedirectToAction("ConfirmCheckout", order);
         }
 
-        [HttpGet]
         [ValidateAntiForgeryToken]
         [AllowAnonymous]
         public IActionResult ConfirmCheckout(Order order)
