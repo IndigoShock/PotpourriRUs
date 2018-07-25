@@ -49,10 +49,13 @@ namespace PuffyAmiYumi.Controllers
             return RedirectToAction("ConfirmCheckout", order);
         }
 
-        [ValidateAntiForgeryToken]
         [AllowAnonymous]
-        public IActionResult ConfirmCheckout(Order order)
+        public async Task<IActionResult> ConfirmCheckout(Order order)
         {
+            order.CreditCard = $"{order.CreditCard.Substring(0, 4)}***********";
+            var user = await _userManager.FindByEmailAsync(User.Identity.Name);
+            Cart cart = _cart.GetCart(user.Id);
+            await _context.PopulateOrderProducts(cart, order);
             return View(order);
         }
 

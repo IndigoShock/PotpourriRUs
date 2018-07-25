@@ -35,9 +35,9 @@ namespace PuffyAmiYumi.Models
             foreach (CartItem item in cart.CartItems)
             {
                 OrderItems OrderItem = new OrderItems();
-                order.UserID = item.CartID;
                 OrderItem.ItemID = item.ProductID;
                 OrderItem.OrderID = order.ID;
+                OrderItem.ItemName = item.ProductName;
                 OrderItem.Price = item.Price;
                 OrderItem.TotalCost = OrderItem.Price * item.Quantity;
                 OrderItem.Quantity = item.Quantity;
@@ -46,6 +46,13 @@ namespace PuffyAmiYumi.Models
             }
                 //await _context.SaveChangesAsync();
                 return order;
+        }
+
+        public async Task<Order> SaveOrder(Order order)
+        {
+            await _context.Orders.AddAsync(order);
+            await _context.SaveChangesAsync();
+            return order;
         }
     }
 }

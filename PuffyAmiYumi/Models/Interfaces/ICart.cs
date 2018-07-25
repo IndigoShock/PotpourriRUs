@@ -13,5 +13,6 @@ namespace PuffyAmiYumi.Models.Interfaces
         Cart GetCart(string id);
         Product GetProduct(int id);
         void DeleteCartItem(int id);
+        Task<Cart> EmptyCart(Cart cart);
     }
 }
