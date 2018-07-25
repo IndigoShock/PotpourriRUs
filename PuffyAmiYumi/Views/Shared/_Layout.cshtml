@@ -10,8 +10,10 @@
 
     <title>Potpourri-R-Us</title>
 </head>
-<nav class="navbar navbar-expand-sm navbar-dark bg-primary">
-    <a href="/" class="navbar-brand">Potpourri-R-Us</a>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-dark bg-primary">
+            <a href="/" class="navbar-brand">Potpourri-R-Us</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar7">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -27,7 +29,7 @@
                 @if (SignInManager.IsSignedIn(User))
                 {
                     <li class="cart-icon" style="width:75px">
-                        <a asp-controller="Shop" asp-action="Index">
+                        <a asp-controller="Cart" asp-action="Index">
                             <img src="~/asset/CartIcon.jpg" id="cart-icon" />
                         </a>
                     </li>
@@ -37,11 +39,6 @@
                 }
                 else
                 {
-                    <li class="cart-icon">
-                        <a asp-controller="Account" asp-action="Login">
-                            <img id="cart-icon" src="~/asset/CartIcon.jpg" />
-                        </a>
-                    </li>
                     <li class="nav-item login">
                         <a class="nav-link" asp-controller="Account" asp-action="Login">Login</a>
                     </li>
@@ -53,7 +50,12 @@
         </div>
     </div>
 </nav>
+</header>
 
-<div>
+<main>
     @RenderBody()
-</div>
+
+
+</main>
+
+</body>
