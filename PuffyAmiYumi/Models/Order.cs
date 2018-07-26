@@ -12,6 +12,7 @@ namespace PuffyAmiYumi.Models
         public string FullName { get; set; }
         public string CreditCard { get; set; }
         public string NameOnCard { get; set; }
+        public DateTime Date { get; set; }
         public string Country { get; set; }
         public string Street { get; set; }
         public string Business { get; set; }
