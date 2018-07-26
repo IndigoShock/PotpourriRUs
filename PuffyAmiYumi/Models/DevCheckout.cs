@@ -31,6 +31,7 @@ namespace PuffyAmiYumi.Models
 
         public async Task<Order> PopulateOrderProducts(Cart cart, Order order)
         {
+            order.Date = DateTime.Now.ToString("MMM d, yyyy (ddd) @ HH:mm tt");
                 order.Products = new List<OrderItems>();
             foreach (CartItem item in cart.CartItems)
             {
@@ -42,6 +43,7 @@ namespace PuffyAmiYumi.Models
                 OrderItem.TotalCost = OrderItem.Price * item.Quantity;
                 OrderItem.Quantity = item.Quantity;
                 order.Products.Add(OrderItem);
+                order.Total += OrderItem.TotalCost;
                 //await _context.OrderItems.AddAsync(OrderItem);
             }
                 //await _context.SaveChangesAsync();
@@ -50,6 +52,7 @@ namespace PuffyAmiYumi.Models
 
         public async Task<Order> SaveOrder(Order order)
         {
+
             await _context.Orders.AddAsync(order);
             await _context.SaveChangesAsync();
             return order;

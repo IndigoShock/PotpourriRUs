@@ -5,6 +5,7 @@
     Layout = "_Layout";
 }
 
+
 <div class="container">
     <form class="needs-validation" novalidate>
 
@@ -19,12 +20,12 @@
                             <br>
                             @Model.City @Model.State
                             <br>
-                            <abbr title="Phone">@Model.Country</abbr> @Model.Zip
+                            <abbr title="country">@Model.Country</abbr> @Model.Zip
                         </address>
                     </div>
                     <div class="col-xs-6 col-sm-6 col-md-6 text-right">
                         <p>
-                            <em>Date Date Date. Hour Stuff</em>
+                            <em>@Model.Date</em>
                         </p>
                         <p>
                             <em>@Model.Email</em>
@@ -62,7 +63,7 @@
                                         <strong>Subtotal: </strong>
                                     </p>
                                     <p>
-                                        <strong>Tax: </strong>
+                                        <strong>Shipping</strong>
                                     </p>
                                 </td>
                                 <td class="text-center">
@@ -78,7 +79,7 @@
                                 <td>   </td>
                                 <td>   </td>
                                 <td class="text-right"><h4><strong>Total: </strong></h4></td>
-                                <td class="text-center text-danger"><h4><strong>$31.53</strong></h4></td>
+                                <td class="text-center text-danger"><h4><strong>$@(Model.Total+5)</strong></h4></td>
                             </tr>
                         </tbody>
                     </table>

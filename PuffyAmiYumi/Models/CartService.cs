@@ -24,19 +24,30 @@ namespace PuffyAmiYumi.Models
         /// <returns>the Cart, which is attached to a User, and it is full of Prducts/CartItems</returns>
         public Cart AddProductToCart(ApplicationUser user, Cart cart, Product product)
         {
-            CartItem item = new CartItem();
-            item.CartID = cart.ID;
-            item.ProductID = product.ID;
-            item.ProductName = product.ProductName;
-            item.ProductIMG = product.ImageURL;
-            item.Quantity++;
-            item.Price = product.Price;
-            
-            
-            cart.CartItems.Add(item);
-            _context.CartItems.Add(item);
-            _context.SaveChanges();
-            
+
+            try
+            {
+                CartItem item = cart.CartItems.FirstOrDefault(p => p.ProductID == product.ID);
+                item.Quantity++;
+            }
+            catch (Exception e)
+            {
+                CartItem item = new CartItem();
+                item.CartID = cart.ID;
+                item.ProductID = product.ID;
+                item.ProductName = product.ProductName;
+                item.ProductIMG = product.ImageURL;
+                item.Quantity = 1;
+                item.Price = product.Price;
+                cart.CartItems.Add(item);
+                _context.CartItems.Add(item);
+            }
+            finally
+            {
+                _context.SaveChanges();
+
+            }
+
             return cart;
         }
 

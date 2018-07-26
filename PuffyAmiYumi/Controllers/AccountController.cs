@@ -114,9 +114,7 @@ namespace PuffyAmiYumi.Controllers
                     TempData["Error"] = "Error loading information";
                 }
 
-                //Create the user.
-                //TODO: Could potentially force the user to add a password here....
-                //
+
                 var user = new ApplicationUser { UserName = elvm.Email, Email = elvm.Email, FirstName = elvm.FirstName, LastName = elvm.LastName };
 
                 var result = await _userManager.CreateAsync(user);
