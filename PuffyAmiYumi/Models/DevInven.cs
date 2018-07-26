@@ -34,7 +34,6 @@ namespace PuffyAmiYumi.Models
 
         public void UpdateProduct(Product product)
         {
-            
             _context.Products.Update(product);
             _context.SaveChanges();
         }

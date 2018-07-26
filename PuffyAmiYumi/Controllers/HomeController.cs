@@ -32,7 +32,7 @@ namespace PuffyAmiYumi.Controllers
 
         public IActionResult GetByID(int id)
         {
-            _context.GetProductByID(id);
+            _context.GetProductById(id);
             return View();
         }
 
@@ -42,9 +42,9 @@ namespace PuffyAmiYumi.Controllers
             return View();
         }
 
-        public IActionResult Update(int id, Product product)
+        public IActionResult Update(Product product)
         {
-            _context.UpdateProduct(id, product);
+            _context.UpdateProduct(product);
             return View();
         }
     }

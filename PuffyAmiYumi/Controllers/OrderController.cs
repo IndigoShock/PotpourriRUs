@@ -46,12 +46,12 @@ namespace PuffyAmiYumi.Controllers
 
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("<h2>Thanks for being so curious!</h2>");
-            sb.AppendLine("<p> Have a look at your silly selections:");
+            sb.AppendLine("<p> Have a look at your silly selections: ");
 
             foreach (OrderItems product in order.Products)
             {
-                sb.Append($"Item: {product.ItemName}");
-                sb.AppendLine($"Price: {product.Price}");
+                sb.Append($"Item: {product.ItemName} <br/>");
+                sb.AppendLine($"Price: {product.Price} <br/>");
             }
             sb.AppendLine($"Total Price: {100m}:");
             sb.Append("</p>");
