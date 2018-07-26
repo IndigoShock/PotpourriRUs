@@ -31,7 +31,7 @@ namespace PuffyAmiYumi.Models
 
         public async Task<Order> PopulateOrderProducts(Cart cart, Order order)
         {
-            order.Date = DateTime.Now;
+            order.Date = DateTime.Now.ToString("MMM d, yyyy (ddd) @ HH:mm tt");
                 order.Products = new List<OrderItems>();
             foreach (CartItem item in cart.CartItems)
             {
