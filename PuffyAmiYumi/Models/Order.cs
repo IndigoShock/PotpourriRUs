@@ -22,6 +22,8 @@ namespace PuffyAmiYumi.Models
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
         public List<OrderItems> Products { get; set; }
+        public string Expire { get; set; }
+        public string SecurityCode { get; set; }
         public decimal Total { get; set; }
 
     }
