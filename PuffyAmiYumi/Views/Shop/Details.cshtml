@@ -3,6 +3,12 @@
 @{
     Layout = "_Layout";
 }
+
+@if (SignInManager.IsSignedIn(User))
+{
+    @await Component.InvokeAsync("Cart")
+}
+
 <main>
     <section>
         <div class="row mb-2">
@@ -15,13 +21,13 @@
                         </h3>
                         <div class="mb-1 text-muted">Nov 12</div>
                         <p class="card-text mb-auto">@Model.ProductName is a great product. Buy it!</p>
-                        <a href="#">Add To Cart</a>
+                        <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@Model.ID" class="btn btn-lg btn-block btn-outline-primary">Add To Cart</a>
                     </div>
                     <img class="card-img-right flex-auto d-none d-lg-block" src="@Model.ImageURL" alt="Product">
                 </div>
             </div>
-         </div>
-</section>
+        </div>
+    </section>
 </main>
 
 <div>

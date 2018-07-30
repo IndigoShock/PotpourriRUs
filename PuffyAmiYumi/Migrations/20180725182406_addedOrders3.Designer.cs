@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PuffyAmiYumi.Data;
 
 namespace PuffyAmiYumi.Migrations
 {
     [DbContext(typeof(YumiDbContext))]
-    partial class YumiDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180725182406_addedOrders3")]
+    partial class addedOrders3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -23,6 +25,8 @@ namespace PuffyAmiYumi.Migrations
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("CheckedOut");
 
                     b.Property<string>("UserTag");
 
@@ -47,6 +51,8 @@ namespace PuffyAmiYumi.Migrations
 
                     b.Property<string>("ProductName");
 
+                    b.Property<bool>("Purchased");
+
                     b.Property<int>("Quantity");
 
                     b.HasKey("ID");
@@ -67,8 +73,6 @@ namespace PuffyAmiYumi.Migrations
                     b.Property<string>("Country");
 
                     b.Property<string>("CreditCard");
-
-                    b.Property<string>("Date");
 
                     b.Property<string>("Email");
 

@@ -6,14 +6,14 @@ namespace PuffyAmiYumi.Models.Interfaces
 {
     public interface IInventory
     {
-        Task<IActionResult> CreateProduct(Product product);
+        Task<Product> CreateProduct(Product product);
 
-        Task<IActionResult> GetProductByID(int ID);
+        Product GetProductById(int? id);
 
         List<Product> GetProduct();
 
-        Task<IActionResult> UpdateProduct(int ID, Product product);
+        void UpdateProduct(Product product);
 
-        Task<IActionResult> DeleteProduct(int ID);
+        void DeleteProduct(int ID);
     }
 }

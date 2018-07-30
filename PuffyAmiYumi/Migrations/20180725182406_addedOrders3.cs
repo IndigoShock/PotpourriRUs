@@ -2,7 +2,7 @@
 
 namespace PuffyAmiYumi.Migrations
 {
-    public partial class addedCartsAgain : Migration
+    public partial class addedOrders3 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

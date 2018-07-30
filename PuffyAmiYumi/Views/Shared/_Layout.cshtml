@@ -10,42 +10,52 @@
 
     <title>Potpourri-R-Us</title>
 </head>
+<body>
+    <header>
         <nav class="navbar navbar-expand-sm navbar-dark bg-primary">
             <a href="/" class="navbar-brand">Potpourri-R-Us</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar7">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="navbar-collapse collapse" id="navbar7">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar7">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-collapse collapse" id="navbar7">
 
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" asp-controller="Product" asp-action="ViewAllProducts">Products</a>
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" asp-controller="Shop" asp-action="Index">Products</a>
+            </li>
+        </ul>
+        <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+            <ul class="navbar-nav ml-auto">
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <li class="cart-icon" style="width:75px">
+                        <a asp-controller="Cart" asp-action="Index">
+                            <img src="~/asset/CartIcon.jpg" id="cart-icon" />
+                        </a>
                     </li>
-                </ul>
-                <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
-                    <ul class="navbar-nav ml-auto">
-@if (SignInManager.IsSignedIn(User))
-{
-    <li class="userName">
-        Welcome Back @User.Claims.First(c => c.Type == "Name").Value
-    </li>
-}
-else
-{
-                        <li class="nav-item login">
-                            <a class="nav-link" asp-controller="Account" asp-action="Login">Login</a>
-                        </li>
-                        <li class="nav-item login">
-                            <a class="nav-link " asp-controller="Account" asp-action="Register">Register</a>
-                        </li>
-}
-
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-        <div>
-            @RenderBody()
+                    <li class="userName">
+                        Welcome Back @User.Claims.First(c => c.Type == "Name").Value
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item login">
+                        <a class="nav-link" asp-controller="Account" asp-action="Login">Login</a>
+                    </li>
+                    <li class="nav-item login">
+                        <a class="nav-link " asp-controller="Account" asp-action="Register">Register</a>
+                    </li>
+                }
+            </ul>
         </div>
-    
+    </div>
+</nav>
+</header>
+
+<main>
+    @RenderBody()
+
+
+</main>
+
+</body>

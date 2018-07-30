@@ -1,0 +1,159 @@
+﻿@model PuffyAmiYumi.Models.Order
+
+@{
+    Layout = "_Layout";
+}
+
+
+<div class="container">
+    <div class="row">
+        
+        <div class="col-md-8 order-md-1">
+            <h4 class="mb-3">Billing address</h4>
+            <form class="needs-validation" novalidate>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="FullName">Full Name</label>
+                        <input type="text" asp-for="FullName" id="firstName" class="form-control" placeholder="Full Name" name="FullName" value="" required>
+                        <div class="invalid-feedback">
+                            Valid Name is required.
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="Email">Email</label>
+                        <input type="text" asp-for="Email" id="email" class="form-control" placeholder="You@Email.com" value="" name="Email" required />
+                        <div class="invalid-feedback">
+                            Valid Email is required.
+                        </div>
+                    </div>
+                </div>
+             <div class="row">
+                <div class="col-md-5 mb-3">
+                    <label for="Street">Address</label>
+                    <input type="text" asp-for="Street" class="form-control" id="address" placeholder="Street Address" name="Street" required/>
+                    <div class="invalid-feedback">
+                        Please enter your shipping address.
+                    </div>
+                </div>
+
+                <div class="col-md-5 mb-3">
+                    <label for="Business">Address 2 <span class="text-muted">(Optional)</span></label>
+                    <input type="text" asp-for="Business" class="form-control" id="address2" placeholder="Apartment or suite">
+                </div>
+              </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Country"></label>
+                            <select asp-for="Country" class="custom-select d-block w-100 bfh-countries" id="countries_states1" data-country="US" required>
+                                <option selected disabled hidden value="">Choose a country</option>
+                            </select>
+                            <span asp-validation-for="Country" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="State">State/Province/Prefecture</label>
+                            <select asp-for="State" class="custom-select d-block w-100
+                                input-medium bfh-states" data-country="countries_states1" required>
+                                <option value="">Please choose a state</option>
+                            </select>
+                            <span asp-validation-for="State" class="text-danger"></span>
+                        </div>
+                    </div>
+
+
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <label for="City">City</label>
+                        <input asp-for="City" name="City" type="text" class="form-control" id="city" placeholder="City" required />
+                        <div class="invalid-feedback">
+                            City Required
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="zip">Zip</label>
+                        <input asp-for="Zip" name="Zip" type="text" class="form-control" id="zip" placeholder="Zip Code" required>
+                        <div class="invalid-feedback">
+                            Zip code required.
+                        </div>
+                    </div>
+
+                </div>
+
+                @*DOESNT ACTUALLY SAVE!!!!!*@
+                <hr class="mb-4">
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="same-address">
+                    <label class="custom-control-label" for="same-address">Shipping address is the same as my billing address</label>
+                </div>
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="save-info">
+                    <label class="custom-control-label" for="save-info">Save this information for next time</label>
+                </div>
+                <hr class="mb-4">
+
+
+
+
+                <h4 class="mb-3">Payment</h4>
+
+                <div class="d-block my-3">
+                    <div class="custom-control custom-radio">
+                        <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked required>
+                        <label class="custom-control-label" for="credit">Credit card</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required>
+                        <label class="custom-control-label" for="debit">Debit card</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required>
+                        <label class="custom-control-label" for="paypal">Paypal</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="cc-name">Name on card</label>
+                        <input asp-for="NameOnCard" type="text" class="form-control" id="cc-name" name="NameOnCard" placeholder="" required>
+                        <small class="text-muted">Full name as displayed on card</small>
+                        <div class="invalid-feedback">
+                            Name on card is required
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="cc-number">Credit card number</label>
+                        <input type="text" asp-for="CreditCard" class="form-control" id="cc-number" name="CreditCard" placeholder="" required>
+                        <div class="invalid-feedback">
+                            Credit card number is required
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <label for="cc-expiration">Expiration</label>
+                        <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
+                        <div class="invalid-feedback">
+                            Expiration date required
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="cc-expiration">CVV</label>
+                        <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
+                        <div class="invalid-feedback">
+                            Security code required
+                        </div>
+                    </div>
+                </div>
+                <hr class="mb-4">
+                <button type="submit" asp-controller="Checkout" asp-action="ConfirmCheckout" class="btn btn-outline-primary btn-lg btn-block">Proceed With Checkout</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+    <script src="https://js.nicdn.de/bootstrap/formhelpers/docs/assets/js/bootstrap-formhelpers-selectbox.js"></script>
+    <script src="https://js.nicdn.de/bootstrap/formhelpers/docs/assets/js/bootstrap-formhelpers-countries.en_US.js"></script>
+    <script src="https://js.nicdn.de/bootstrap/formhelpers/docs/assets/js/bootstrap-formhelpers-countries.js"></script>
+    <script src="https://js.nicdn.de/bootstrap/formhelpers/docs/assets/js/bootstrap-formhelpers-states.en_US.js"></script>
+    <script src="https://js.nicdn.de/bootstrap/formhelpers/docs/assets/js/bootstrap-formhelpers-states.js"></script>

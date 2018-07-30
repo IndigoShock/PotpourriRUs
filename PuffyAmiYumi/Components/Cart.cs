@@ -13,22 +13,24 @@ namespace PuffyAmiYumi.Components
 {
     public class Cart : ViewComponent
     {
-        private YumiDbContext _context;
+        private ICart _context;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
-        public Cart(YumiDbContext context, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        public Cart(ICart context, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
         {
             _signInManager = signInManager;
             _userManager = userManager;
             _context = context;
         }
-
-        public async Task<IViewComponentResult> InvokeAsync(bool purchased)
+        /// <summary>
+        /// view Component
+        /// </summary>
+        /// <param name="purchased"></param>
+        /// <returns></returns>
+        public async Task<IViewComponentResult> InvokeAsync()
         {
             var user = await _userManager.FindByEmailAsync(User.Identity.Name);
-            var userCart = _context.Carts.Where(x => x.UserEmail == user.Id)
-                                         .Include(p => p.CartItems)
-                                         .ThenInclude(x => x.Product).First();
+            var userCart = _context.GetCart(user.Id);
             return View(userCart);
         }
     }
