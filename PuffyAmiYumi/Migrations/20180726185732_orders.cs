@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PuffyAmiYumi.Migrations
 {
-    public partial class initial : Migration
+    public partial class orders : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,7 +14,6 @@ namespace PuffyAmiYumi.Migrations
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     CartID = table.Column<int>(nullable: false),
-                    Purchased = table.Column<bool>(nullable: false),
                     ProductID = table.Column<int>(nullable: false),
                     ProductName = table.Column<string>(nullable: true),
                     ProductIMG = table.Column<string>(nullable: true),
@@ -32,8 +31,7 @@ namespace PuffyAmiYumi.Migrations
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    UserTag = table.Column<string>(nullable: true),
-                    CheckedOut = table.Column<bool>(nullable: false)
+                    UserTag = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -47,6 +45,18 @@ namespace PuffyAmiYumi.Migrations
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     UserID = table.Column<int>(nullable: false),
+                    FullName = table.Column<string>(nullable: true),
+                    CreditCard = table.Column<string>(nullable: true),
+                    NameOnCard = table.Column<string>(nullable: true),
+                    Date = table.Column<string>(nullable: true),
+                    Country = table.Column<string>(nullable: true),
+                    Street = table.Column<string>(nullable: true),
+                    Business = table.Column<string>(nullable: true),
+                    City = table.Column<string>(nullable: true),
+                    State = table.Column<string>(nullable: true),
+                    Zip = table.Column<string>(nullable: true),
+                    PhoneNumber = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
                     Total = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>

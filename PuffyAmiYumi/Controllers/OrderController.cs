@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
+using PuffyAmiYumi.Data;
 using PuffyAmiYumi.Models;
 using PuffyAmiYumi.Models.Interfaces;
 using System;
@@ -20,13 +21,15 @@ namespace PuffyAmiYumi.Controllers
         private IEmailSender _emailSender;
         private ICart _cart;
         private IDevCheckout _context;
-        public OrderController(IDevCheckout context, ICart cart, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IEmailSender emailSender)
+        //private readonly YumiDbContext _yumi;
+        public OrderController(IDevCheckout context, ICart cart, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IEmailSender emailSender, YumiDbContext _yumi)
         {
             _cart = cart;
             _context = context;
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
+            //_yumi = yumi;
         }
 
         [AllowAnonymous]
@@ -47,16 +50,18 @@ namespace PuffyAmiYumi.Controllers
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("<h2>Thanks for being so curious!</h2>");
             sb.AppendLine("<p> Have a look at your silly selections: ");
-
             foreach (OrderItems product in order.Products)
             {
                 sb.Append($"Item: {product.ItemName} <br/>");
                 sb.AppendLine($"Price: {product.Price} <br/>");
             }
-            sb.AppendLine($"Total Price: {100m}:");
+            sb.AppendLine($"Total Price: {order.Total}:");
             sb.Append("</p>");
 
             await _emailSender.SendEmailAsync(user.Email, "Thank you for your order at Potpourri-R-Us!", sb.ToString());
+
+            //save orders to database
+            //await 
 
             await _cart.EmptyCart(cart);
             return View("ThankYou");

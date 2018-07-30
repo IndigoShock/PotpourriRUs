@@ -9,8 +9,8 @@ using PuffyAmiYumi.Data;
 namespace PuffyAmiYumi.Migrations
 {
     [DbContext(typeof(YumiDbContext))]
-    [Migration("20180724182710_addedOrders")]
-    partial class addedOrders
+    [Migration("20180726185732_orders")]
+    partial class orders
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -25,8 +25,6 @@ namespace PuffyAmiYumi.Migrations
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("CheckedOut");
 
                     b.Property<string>("UserTag");
 
@@ -51,8 +49,6 @@ namespace PuffyAmiYumi.Migrations
 
                     b.Property<string>("ProductName");
 
-                    b.Property<bool>("Purchased");
-
                     b.Property<int>("Quantity");
 
                     b.HasKey("ID");
@@ -70,11 +66,17 @@ namespace PuffyAmiYumi.Migrations
 
                     b.Property<string>("City");
 
+                    b.Property<string>("Country");
+
                     b.Property<string>("CreditCard");
+
+                    b.Property<string>("Date");
 
                     b.Property<string>("Email");
 
                     b.Property<string>("FullName");
+
+                    b.Property<string>("NameOnCard");
 
                     b.Property<string>("PhoneNumber");
 
