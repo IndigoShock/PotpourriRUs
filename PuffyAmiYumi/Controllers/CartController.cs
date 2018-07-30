@@ -22,7 +22,11 @@ namespace PuffyAmiYumi.Controllers
             _userManager = userManager;
             _signInManager = signInManager;
         }
-
+        /// <summary>
+        /// Deletes the CartItem from their cart
+        /// </summary>
+        /// <param name="id">The Id of the cart-Item you want to Remove</param>
+        /// <returns>Their Cart Page, which displays all the items in the cart</returns>
         [AllowAnonymous]
         public IActionResult Delete(int id)
         {
@@ -42,7 +46,10 @@ namespace PuffyAmiYumi.Controllers
             Cart cart = _context.GetCart(user.Id);
             return RedirectToAction("Index", "Order", cart);
         }
-
+        /// <summary>
+        /// Finds the Cart and its contents that is associated with the user
+        /// </summary>
+        /// <returns>A page to display all the items</returns>
         [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
@@ -51,6 +58,11 @@ namespace PuffyAmiYumi.Controllers
             var cart = _context.GetCart(user.Id);
             return View(cart);
         }
+        /// <summary>
+        /// Adds a specific Item to the user's cart
+        /// </summary>
+        /// <param name="id">ID of the item they want to add</param>
+        /// <returns>Page that contains their cart and all its' contents</returns>
         [AllowAnonymous]
         public async Task<IActionResult> AddToCart(int id)
         {

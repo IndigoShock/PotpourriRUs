@@ -26,7 +26,7 @@ namespace PuffyAmiYumi.Controllers
             Configuration = configuration;
         }
 
-        // GET: Admin
+        
         public ActionResult Index()
         {
             return View();

@@ -9,8 +9,8 @@ using PuffyAmiYumi.Data;
 namespace PuffyAmiYumi.Migrations
 {
     [DbContext(typeof(YumiDbContext))]
-    [Migration("20180724182710_addedOrders")]
-    partial class addedOrders
+    [Migration("20180726184201_addedexpiration")]
+    partial class addedexpiration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -25,8 +25,6 @@ namespace PuffyAmiYumi.Migrations
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("CheckedOut");
 
                     b.Property<string>("UserTag");
 
@@ -51,8 +49,6 @@ namespace PuffyAmiYumi.Migrations
 
                     b.Property<string>("ProductName");
 
-                    b.Property<bool>("Purchased");
-
                     b.Property<int>("Quantity");
 
                     b.HasKey("ID");
@@ -70,13 +66,23 @@ namespace PuffyAmiYumi.Migrations
 
                     b.Property<string>("City");
 
+                    b.Property<string>("Country");
+
                     b.Property<string>("CreditCard");
+
+                    b.Property<string>("Date");
 
                     b.Property<string>("Email");
 
+                    b.Property<string>("Expire");
+
                     b.Property<string>("FullName");
 
+                    b.Property<string>("NameOnCard");
+
                     b.Property<string>("PhoneNumber");
+
+                    b.Property<string>("SecurityCode");
 
                     b.Property<string>("State");
 
@@ -139,16 +145,16 @@ namespace PuffyAmiYumi.Migrations
                     b.ToTable("Products");
 
                     b.HasData(
-                        new { ID = 1, ImageURL = "asset/Patchouli.jpg", Price = 11.99m, ProductName = "Karma-Patchouli-Potpourri", Stock = 100 },
-                        new { ID = 2, ImageURL = "asset/RoseScented.jpg", Price = 11.99m, ProductName = "Karma-Rose-Potpourri", Stock = 100 },
-                        new { ID = 3, ImageURL = "asset/VanillaScented.jpg", Price = 11.99m, ProductName = "Karma-Vanilla-Potpourri", Stock = 100 },
-                        new { ID = 4, ImageURL = "asset/JasmineScented.jpg", Price = 11.99m, ProductName = "Karma-Jasmine-Potpourri", Stock = 100 },
-                        new { ID = 5, ImageURL = "asset/Sandalwood.jpg", Price = 11.99m, ProductName = "Karma-Sandalwood-Potpourri", Stock = 100 },
-                        new { ID = 6, ImageURL = "asset/Lavender.jpg", Price = 11.99m, ProductName = "Karma-Lavender-Potpourri", Stock = 100 },
-                        new { ID = 7, ImageURL = "asset/SandalwoodSpice.jpg", Price = 12.99m, ProductName = "Esscents-Sandalwood-Spice-Potpourri", Stock = 100 },
-                        new { ID = 8, ImageURL = "asset/Geranium.jpg", Price = 12.99m, ProductName = "Esscents-Geranium-Potpourri", Stock = 100 },
-                        new { ID = 9, ImageURL = "asset/MorningBlossom.jpg", Price = 12.99m, ProductName = "Esscents-Morning-Blossom-Potpourri", Stock = 100 },
-                        new { ID = 10, ImageURL = "asset/JasmineTea.jpg", Price = 12.99m, ProductName = "Esscents-Jasmine-Tea-Potpourri", Stock = 100 }
+                        new { ID = 1, ImageURL = "asset/Patchouli.jpg", Price = 0.99m, ProductName = "Karma-Patchouli-Potpourri", Stock = 100 },
+                        new { ID = 2, ImageURL = "asset/RoseScented.jpg", Price = 1.99m, ProductName = "Karma-Rose-Potpourri", Stock = 100 },
+                        new { ID = 3, ImageURL = "asset/VanillaScented.jpg", Price = 1.99m, ProductName = "Karma-Vanilla-Potpourri", Stock = 100 },
+                        new { ID = 4, ImageURL = "asset/JasmineScented.jpg", Price = 1.59m, ProductName = "Karma-Jasmine-Potpourri", Stock = 100 },
+                        new { ID = 5, ImageURL = "asset/Sandalwood.jpg", Price = 1.15m, ProductName = "Karma-Sandalwood-Potpourri", Stock = 100 },
+                        new { ID = 6, ImageURL = "asset/Lavender.jpg", Price = 1.00m, ProductName = "Karma-Lavender-Potpourri", Stock = 100 },
+                        new { ID = 7, ImageURL = "asset/SandalwoodSpice.jpg", Price = 1.00m, ProductName = "Esscents-Sandalwood-Spice-Potpourri", Stock = 100 },
+                        new { ID = 8, ImageURL = "asset/Geranium.jpg", Price = 1.09m, ProductName = "Esscents-Geranium-Potpourri", Stock = 100 },
+                        new { ID = 9, ImageURL = "asset/MorningBlossom.jpg", Price = 0.99m, ProductName = "Esscents-Morning-Blossom-Potpourri", Stock = 100 },
+                        new { ID = 10, ImageURL = "asset/JasmineTea.jpg", Price = 0.99m, ProductName = "Esscents-Jasmine-Tea-Potpourri", Stock = 100 }
                     );
                 });
 
