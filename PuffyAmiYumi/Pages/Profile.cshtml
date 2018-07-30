@@ -1,0 +1,33 @@
+﻿@page
+@model PuffyAmiYumi.Pages.ProfileModel
+@{
+}
+@{
+    Layout = "_Layout";
+}
+<h1>Here is Profile </h1>
+
+<form method="post">
+
+    <div>
+
+        <label asp-for="FirstName"></label> :
+        <input asp-for="FirstName" />
+    </div>
+
+    <div>
+
+        <label asp-for="LastName"></label> :
+        <input asp-for="LastName" />
+    </div>
+
+    <div>
+
+        <label asp-for="Email"></label> :
+        <input value="@Model.Email" readonly="readonly" asp-for="Email" />
+    </div>
+    <div>
+    <button type="submit" asp-controller="Home" asp-action="Index" class="btn btn-outline-primary btn-lg btn-block">Update Profile</button>
+        </div>
+
+</form>
