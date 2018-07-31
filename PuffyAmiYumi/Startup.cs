@@ -56,7 +56,7 @@ namespace PuffyAmiYumi
 
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("HasEmail", policy => policy.RequireClaim("emailClaim"));
+                options.AddPolicy("HasEmail", policy => policy.RequireClaim("@"));
                 options.AddPolicy("AdminOnly", policy => policy.RequireRole(ApplicationRoles.Admin));
                 options.AddPolicy("MemberOnly", policy => policy.RequireRole(ApplicationRoles.Member));
             });

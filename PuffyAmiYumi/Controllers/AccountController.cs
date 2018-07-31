@@ -25,27 +25,37 @@ namespace PuffyAmiYumi.Controllers
             _signInManager = signInManager;
             _emailSender = emailSender;
         }
-
-        [HttpGet]
-        [AllowAnonymous]
-        public IActionResult Index()
-        {
-            return View();
-        }
-
+        //[HttpGet]
+        //[AllowAnonymous]
+        //public IActionResult Index()
+        //{
+        //    return View();
+        //}
+        /// <summary>
+        /// Displays the Register page
+        /// </summary>
+        /// <returns>Register View</returns>
         [AllowAnonymous]
         [HttpGet]
         public IActionResult Register()
         {
             return View();
         }
-
+        /// <summary>
+        /// Displays the Login Page
+        /// </summary>
+        /// <returns>Login View</returns>
         [AllowAnonymous]
         [HttpGet]
         public IActionResult Login()
         {
             return View();
         }
+        /// <summary>
+        /// When we are on development environment we want Microsoft/Google (our 3rd party OAuths) to redirect us to our local ip address
+        /// </summary>
+        /// <param name="returnURL">localhost:5555</param>
+        /// <returns>To a signed in page</returns>
         private IActionResult RedirectToLocal(string returnURL)
         {
             if (Url.IsLocalUrl(returnURL))
@@ -57,6 +67,11 @@ namespace PuffyAmiYumi.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
+        /// <summary>
+        /// When a user wants to login with a 3rd party for the first time, this page is displayed after a successful login and displays a different login page captuing their detials from the selected provider
+        /// </summary>
+        /// <param name="provider">Either Google, or MS is our provider</param>
+        /// <returns>A Result of OK or Failed</returns>
         [HttpPost]
         [AllowAnonymous]
         public IActionResult ExternalLogin(string provider)
@@ -65,6 +80,11 @@ namespace PuffyAmiYumi.Controllers
             var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
             return Challenge(properties, provider);
         }
+        /// <summary>
+        /// The method that triggers when we get word back from the OAuth Provider
+        /// </summary>
+        /// <param name="remoteError"></param>
+        /// <returns>On success it logs you in and displays the home screen, on failure, back to the login screen</returns>
         [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> ExternalLoginCallback(string remoteError)
@@ -102,8 +122,13 @@ namespace PuffyAmiYumi.Controllers
             //redirect to the external login page for the user to 
             return View("ExternalLogin", new ExternalLoginViewModel { Email = email, FirstName = firstName, LastName = lastName});
         }
-        [AllowAnonymous]
+        /// <summary>
+        /// Once the user confirms their information is correct, they trigger this function, which captures the information the user put in the textboxes
+        /// </summary>
+        /// <param name="elvm">A view model that holds the text box info</param>
+        /// <returns>On success - Home page, on failure - Back to the login screen</returns>
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> ExternalLoginConfirmation(ExternalLoginViewModel elvm)
         {
             if (ModelState.IsValid)
@@ -150,9 +175,13 @@ namespace PuffyAmiYumi.Controllers
             return View(elvm);
         }
 
-
-        [AllowAnonymous]
+        /// <summary>
+        /// This particular Register method gets called once people press Create Account on the register page
+        /// </summary>
+        /// <param name="rvm">rvm is a View Model that captures the user input</param>
+        /// <returns>Login page</returns>
         [HttpPost]
+        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel rvm)
         {
@@ -188,20 +217,32 @@ namespace PuffyAmiYumi.Controllers
 
                     await _userManager.AddClaimsAsync(user, claims);
                     await _userManager.AddToRoleAsync(user, ApplicationRoles.Member);
-
-                    await _emailSender.SendEmailAsync(user.Email, "Welcome to Potpourri-R-Us", "" +
-                        "<h1>Thank you for registering with Potpourri-R-Us!</h1>" +
-                        "<br/>" +
-                        "<p>We here at Potpourri-R-Us are about experiences. We are passionate about our products. The aroma of calming lavender? The nostalgic feeling of vanilla? We have it! " +
-                        "<a href='https://puffyamiyumiapp.azurewebsites.net'> Come on in!</a>" +
-                        "</p>");
+                    SendEmail(user.Email);
 
                     return RedirectToAction("Login", "Account");
                 }
             }
             return View(rvm);
         }
-
+        /// <summary>
+        /// Sends a Welcome to our Site email
+        /// </summary>
+        /// <param name="email">The signed in user's email</param>
+        [AllowAnonymous]
+        public async void SendEmail(string email)
+        {
+            await _emailSender.SendEmailAsync(email, "Welcome to Potpourri-R-Us", "" +
+                "<h1>Thank you for registering with Potpourri-R-Us!</h1>" +
+                "<br/>" +
+                "<p>We here at Potpourri-R-Us are about experiences. We are passionate about our products. The aroma of calming lavender? The nostalgic feeling of vanilla? We have it! " +
+                "<a href='https://puffyamiyumiapp.azurewebsites.net'> Come on in!</a>" +
+                "</p>");
+        }
+        /// <summary>
+        /// Captures the user input on the login page and determines whether they have an account with us
+        /// </summary>
+        /// <param name="model">A View Model that captures user input from login screen</param>
+        /// <returns>A Home page, Login Page, or a Admin page</returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -224,7 +265,11 @@ namespace PuffyAmiYumi.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
-
+        /// <summary>
+        /// Logs the user out
+        /// </summary>
+        /// <returns>Home page</returns>
+        [AllowAnonymous]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
