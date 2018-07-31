@@ -14,6 +14,5 @@ namespace PuffyAmiYumi.Models
         public string ProductIMG { get; set; }
         public int Quantity { get; set; }
         public decimal Price { get; set; }
-
     }
 }

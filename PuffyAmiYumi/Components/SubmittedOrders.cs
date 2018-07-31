@@ -1,11 +1,14 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PuffyAmiYumi.Data;
 using PuffyAmiYumi.Models;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace PuffyAmiYumi.Components
 {
+    [Authorize(Policy = "AdminOnly")]
     public class SubmittedOrders : ViewComponent
     {
         private readonly YumiDbContext _context;
@@ -23,11 +26,12 @@ namespace PuffyAmiYumi.Components
         /// Find orders in the YumiDatabase
         /// </summary>
         /// <returns></returns>
-        public async Task<IViewComponentResult> InvokeAsync()
+       
+        public async Task<IViewComponentResult> InvokeAsync(int number)
         {
-            var user = await _userManager.FindByEmailAsync(User.Identity.Name);
-            var showOrders = _context.Orders;
-            return View(showOrders);
+            var posts = _context.Orders.OrderByDescending(a => a.ID)
+                .Take(number).ToList();
+            return View(posts);
         }
     }
 }

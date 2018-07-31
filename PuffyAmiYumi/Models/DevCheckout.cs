@@ -52,10 +52,19 @@ namespace PuffyAmiYumi.Models
 
         public async Task<Order> SaveOrder(Order order)
         {
-
             await _context.Orders.AddAsync(order);
             await _context.SaveChangesAsync();
             return order;
+        }
+
+        public async GetOrder()
+        {
+
+        }
+
+        public async GetOrderItems()
+        {
+
         }
     }
 }

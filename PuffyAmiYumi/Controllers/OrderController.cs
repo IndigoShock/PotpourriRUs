@@ -67,5 +67,7 @@ namespace PuffyAmiYumi.Controllers
             return View("ThankYou");
         }
 
+        //[HttpGet]
+
     }
 }

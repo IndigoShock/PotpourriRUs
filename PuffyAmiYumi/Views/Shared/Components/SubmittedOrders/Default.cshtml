@@ -1,5 +1,9 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@model Order
+
+<h4>Orders</h4>
+@foreach (OrderItems item in Model.Order)
+{
+    <p>@item.ItemName</p>
 }
+
+    <button asp-controller="Order" asp-action="OrderDetails" class="btn btn-outline-primary btn-lg btn-block">Proceed to Order</button>
