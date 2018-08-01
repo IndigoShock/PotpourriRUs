@@ -21,15 +21,13 @@ namespace PuffyAmiYumi.Controllers
         private IEmailSender _emailSender;
         private ICart _cart;
         private IDevCheckout _context;
-        //private readonly YumiDbContext _yumi;
-        public OrderController(IDevCheckout context, ICart cart, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IEmailSender emailSender, YumiDbContext _yumi)
+        public OrderController(IDevCheckout context, ICart cart, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IEmailSender emailSender)
         {
             _cart = cart;
             _context = context;
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
-            //_yumi = yumi;
         }
 
         [AllowAnonymous]
@@ -60,14 +58,16 @@ namespace PuffyAmiYumi.Controllers
 
             await _emailSender.SendEmailAsync(user.Email, "Thank you for your order at Potpourri-R-Us!", sb.ToString());
 
-            //save orders to database
-            //await 
-
             await _cart.EmptyCart(cart);
             return View("ThankYou");
         }
 
-        //[HttpGet]
-
+        [AllowAnonymous]
+        public async Task<IActionResult> DisplayOrders(int number)
+        {
+            var user = await _userManager.FindByEmailAsync(User.Identity.Name);
+            List<Order> orders = _context.GetOrders(number);
+                return View("OrderDetails");
+        }
     }
 }

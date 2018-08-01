@@ -24,11 +24,6 @@ namespace PuffyAmiYumi.Models
             return order;
         }
 
-        public void NewOrder(Order order)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<Order> PopulateOrderProducts(Cart cart, Order order)
         {
             order.Date = DateTime.Now.ToString("MMM d, yyyy (ddd) @ HH:mm tt");
@@ -57,14 +52,21 @@ namespace PuffyAmiYumi.Models
             return order;
         }
 
-        public async GetOrder()
+        public List<Order> GetOrders(int number)
         {
-
+            List<Order> orders = _context.Orders.OrderByDescending(a => a.ID)
+                .Take(number).ToList();
+            return orders;
         }
 
-        public async GetOrderItems()
-        {
+        //public async GetOrderItems()
+        //{
 
+        //}
+
+        public void NewOrder(Order order)
+        {
+            throw new NotImplementedException();
         }
     }
 }
