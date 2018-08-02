@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PuffyAmiYumi.Migrations
 {
-    public partial class addedexpiration : Migration
+    public partial class thisOne : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

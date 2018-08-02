@@ -67,7 +67,7 @@ namespace PuffyAmiYumi.Controllers
         {
             var user = await _userManager.FindByEmailAsync(User.Identity.Name);
             List<Order> orders = _context.GetOrders(number);
-                return View("OrderDetails");
+                return View("AdminOrders");
         }
     }
 }

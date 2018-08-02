@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace PuffyAmiYumi.Models.ViewModel
 {
@@ -11,5 +12,9 @@ namespace PuffyAmiYumi.Models.ViewModel
         [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; }
+
+        public IEnumerable<Order> order { get; set; }
+
+        public List<OrderItems> orderItems { get; set; }
     }
 }
