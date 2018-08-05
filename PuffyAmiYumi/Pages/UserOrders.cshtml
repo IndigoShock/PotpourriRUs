@@ -1,5 +1,4 @@
-﻿@*
-@page
+﻿@page
 @model PuffyAmiYumi.Pages.UserOrdersModel
 @{
     ViewData["Title"] = "UserOrders";
@@ -11,6 +10,12 @@
 
 <h2>User Orders</h2>
 
+@if (SignInManager.IsSignedIn(User))
+{
+    @await Component.InvokeAsync("SubmittedOrders")
+}
+
+@*
 <form method="get">
 
     <div>
@@ -40,4 +45,5 @@
     - Individual items of the order
 
     - Grand total of order
+
 *@

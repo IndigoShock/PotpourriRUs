@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PuffyAmiYumi.Components
 {
-    [Authorize(Policy = "AdminOnly")]
+    [Authorize]
     public class SubmittedOrders : ViewComponent
     {
         private readonly YumiDbContext _context;
@@ -27,10 +27,11 @@ namespace PuffyAmiYumi.Components
         /// </summary>
         /// <returns></returns>
        
-        public async Task<IViewComponentResult> InvokeAsync(int number)
+        public async Task<IViewComponentResult> InvokeAsync()
         {
             var posts = _context.Orders.OrderByDescending(a => a.ID)
-                .Take(number).ToList();
+                .Take(3).ToList();
+
             return View(posts);
         }
     }

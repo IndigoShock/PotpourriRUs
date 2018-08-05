@@ -1,5 +1,5 @@
 #Welcome to Potpourri-R-Us!#
-Check out our site here - https://puffyamiyumiapp.azurewebsites.net
+Check out our site here - https://puffyamiyumi20180802033427.azurewebsites.net/
 
 ## Overview
 Potpourri-R-Us is an E-Commerce site that sells only Potpourri for users who are interested in a specialty or niche store.

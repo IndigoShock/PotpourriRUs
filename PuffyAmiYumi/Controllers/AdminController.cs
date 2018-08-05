@@ -29,7 +29,6 @@ namespace PuffyAmiYumi.Controllers
             _orders = orders;
             Configuration = configuration;
         }
-
         
         public ActionResult Index()
         {
