@@ -1,4 +1,4 @@
-#Welcome to Potpourri-R-Us!
+# Welcome to Potpourri-R-Us!
 Check out our site here - https://puffyamiyumi20180802033427.azurewebsites.net/
 
 ## Overview
