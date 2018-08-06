@@ -53,7 +53,7 @@ namespace PuffyAmiYumi.Controllers
                 sb.Append($"Item: {product.ItemName} <br/>");
                 sb.AppendLine($"Price: {product.Price} <br/>");
             }
-            sb.AppendLine($"Total Price: {100m}:");
+            sb.AppendLine($"Total Price: ${order.Total}");
             sb.Append("</p>");
 
             await _emailSender.SendEmailAsync(user.Email, "Thank you for your order at Potpourri-R-Us!", sb.ToString());
@@ -61,6 +61,7 @@ namespace PuffyAmiYumi.Controllers
             await _cart.EmptyCart(cart);
             return View("ThankYou");
         }
+        
 
     }
 }

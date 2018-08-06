@@ -66,7 +66,16 @@ namespace PuffyAmiYumi.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> AddToCart(int id)
         {
-            var user = await _userManager.FindByEmailAsync(User.Identity.Name);
+            ApplicationUser user;
+            try
+            {
+            user = await _userManager.FindByEmailAsync(User.Identity.Name);
+
+            }
+            catch
+            {
+                return RedirectToAction("Login", "Account");
+            }
             var cart = _context.GetCart(user.Id);
             Product product = _context.GetProduct(id);
 
