@@ -10,7 +10,6 @@ namespace PuffyAmiYumi.Models
         public int ID { get; set; }
         public string UserTag { get; set; }
         public List<CartItem> CartItems = new List<CartItem>();
-        
     }
     
 }

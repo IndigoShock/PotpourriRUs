@@ -14,7 +14,6 @@ namespace PuffyAmiYumi.Migrations
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     CartID = table.Column<int>(nullable: false),
-                    Purchased = table.Column<bool>(nullable: false),
                     ProductID = table.Column<int>(nullable: false),
                     ProductName = table.Column<string>(nullable: true),
                     ProductIMG = table.Column<string>(nullable: true),
@@ -32,8 +31,7 @@ namespace PuffyAmiYumi.Migrations
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    UserTag = table.Column<string>(nullable: true),
-                    CheckedOut = table.Column<bool>(nullable: false)
+                    UserTag = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -47,6 +45,20 @@ namespace PuffyAmiYumi.Migrations
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     UserID = table.Column<int>(nullable: false),
+                    FullName = table.Column<string>(nullable: true),
+                    CreditCard = table.Column<string>(nullable: true),
+                    NameOnCard = table.Column<string>(nullable: true),
+                    Date = table.Column<string>(nullable: true),
+                    Country = table.Column<string>(nullable: true),
+                    Street = table.Column<string>(nullable: true),
+                    Business = table.Column<string>(nullable: true),
+                    City = table.Column<string>(nullable: true),
+                    State = table.Column<string>(nullable: true),
+                    Zip = table.Column<string>(nullable: true),
+                    PhoneNumber = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
+                    Expire = table.Column<string>(nullable: true),
+                    SecurityCode = table.Column<string>(nullable: true),
                     Total = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
@@ -100,16 +112,16 @@ namespace PuffyAmiYumi.Migrations
                 columns: new[] { "ID", "ImageURL", "Price", "ProductName", "SKU", "Stock" },
                 values: new object[,]
                 {
-                    { 1, "asset/Patchouli.jpg", 11.99m, "Karma-Patchouli-Potpourri", null, 100 },
-                    { 2, "asset/RoseScented.jpg", 11.99m, "Karma-Rose-Potpourri", null, 100 },
-                    { 3, "asset/VanillaScented.jpg", 11.99m, "Karma-Vanilla-Potpourri", null, 100 },
-                    { 4, "asset/JasmineScented.jpg", 11.99m, "Karma-Jasmine-Potpourri", null, 100 },
-                    { 5, "asset/Sandalwood.jpg", 11.99m, "Karma-Sandalwood-Potpourri", null, 100 },
-                    { 6, "asset/Lavender.jpg", 11.99m, "Karma-Lavender-Potpourri", null, 100 },
-                    { 7, "asset/SandalwoodSpice.jpg", 12.99m, "Esscents-Sandalwood-Spice-Potpourri", null, 100 },
-                    { 8, "asset/Geranium.jpg", 12.99m, "Esscents-Geranium-Potpourri", null, 100 },
-                    { 9, "asset/MorningBlossom.jpg", 12.99m, "Esscents-Morning-Blossom-Potpourri", null, 100 },
-                    { 10, "asset/JasmineTea.jpg", 12.99m, "Esscents-Jasmine-Tea-Potpourri", null, 100 }
+                    { 1, "asset/Patchouli.jpg", 0.99m, "Karma-Patchouli-Potpourri", null, 100 },
+                    { 2, "asset/RoseScented.jpg", 1.99m, "Karma-Rose-Potpourri", null, 100 },
+                    { 3, "asset/VanillaScented.jpg", 1.99m, "Karma-Vanilla-Potpourri", null, 100 },
+                    { 4, "asset/JasmineScented.jpg", 1.59m, "Karma-Jasmine-Potpourri", null, 100 },
+                    { 5, "asset/Sandalwood.jpg", 1.15m, "Karma-Sandalwood-Potpourri", null, 100 },
+                    { 6, "asset/Lavender.jpg", 1.00m, "Karma-Lavender-Potpourri", null, 100 },
+                    { 7, "asset/SandalwoodSpice.jpg", 1.00m, "Esscents-Sandalwood-Spice-Potpourri", null, 100 },
+                    { 8, "asset/Geranium.jpg", 1.09m, "Esscents-Geranium-Potpourri", null, 100 },
+                    { 9, "asset/MorningBlossom.jpg", 0.99m, "Esscents-Morning-Blossom-Potpourri", null, 100 },
+                    { 10, "asset/JasmineTea.jpg", 0.99m, "Esscents-Jasmine-Tea-Potpourri", null, 100 }
                 });
 
             migrationBuilder.CreateIndex(

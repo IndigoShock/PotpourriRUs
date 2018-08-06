@@ -1,0 +1,49 @@
+﻿@page
+@model PuffyAmiYumi.Pages.UserOrdersModel
+@{
+    ViewData["Title"] = "UserOrders";
+}
+
+@{
+    Layout = "_Layout";
+}
+
+<h2>User Orders</h2>
+
+@if (SignInManager.IsSignedIn(User))
+{
+    @await Component.InvokeAsync("SubmittedOrders")
+}
+
+@*
+<form method="get">
+
+    <div>
+        <label asp-for="FirstName"></label> :
+        <input asp-for="FirstName" />
+    </div>
+
+    <div>
+        <label asp-for="LastName"></label> :
+        <input asp-for="LastName" />
+    </div>
+
+    <div>
+        <label asp-for="Email"></label> :
+        <input value="@Model.Email" readonly="readonly" asp-for="Email" />
+    </div>
+
+</form>
+    - Name of Customer
+
+    - Date of order
+
+    - Number of items purchased
+
+    - Line Item breakdown of what was purchased (with QTY if applicable)
+
+    - Individual items of the order
+
+    - Grand total of order
+
+*@

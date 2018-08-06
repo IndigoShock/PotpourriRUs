@@ -9,8 +9,8 @@ using PuffyAmiYumi.Data;
 namespace PuffyAmiYumi.Migrations
 {
     [DbContext(typeof(YumiDbContext))]
-    [Migration("20180726184201_addedexpiration")]
-    partial class addedexpiration
+    [Migration("20180803045514_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
