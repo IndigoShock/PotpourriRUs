@@ -46,7 +46,7 @@ namespace PuffyAmiYumi.Controllers
 
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("<h2>Thanks for being so curious!</h2>");
-            sb.AppendLine("<p> Have a look at your silly selections: ");
+            sb.AppendLine("<p> Have a look at your purchases: ");
 
             foreach (OrderItems product in order.Products)
             {
