@@ -1,4 +1,4 @@
-#Welcome to Potpourri-R-Us!#
+#Welcome to Potpourri-R-Us!
 Check out our site here - https://puffyamiyumi20180802033427.azurewebsites.net/
 
 ## Overview
@@ -32,16 +32,16 @@ This application is created using ASP.NET Core 2.1 Web Application <br />
 *Libraries*: ASP.NET, Bootstrap, SwaggerUI <br />
 *Type of Application*: Web Application <br />
 
-##Claims
+## Claims
 The claims we are enforcing are First Name, Last Name, Birthday, Email and Password. We chose these because for someone to register, the basics is to have their name, birthday and email. It seems to make sense since people would want to if they were to purchase at a store. And if they want to login to their account unique to them, they would create a password.
 
-##Policies
+## Policies
 The policies we are enforcing are Email and whichever role the user is assigned. The two roles are Member and Admin. We want these two policies because each user will upon registration have an email. And that email will be connected to a Member or an Admin role. If the email is for aa Admin, they will have Admin privileges. Otherwise, the user will have Member access.
 
 ##OAuth Providers
 The OAuth Providers we chose are Microsoft and Google.
 
-##Database Schema
+## Database Schema
 ![Db Schema](~/asset/PotpourriDbSchema.png)
 
 #Explanation Of Database Schema
