@@ -52,4 +52,4 @@ Depending on their access, they will have access to Products or the Cart plus Ca
 Instead, they see the Cart and CartItem, which will be attached to their account. Each Cart will have a list of CartItems. And the CartItems have more detailed properties like Name, ProductId, Image, Pricing and so on.
 
 ## Vulnerability Report
-Here is a link to our Vulnerability Report ![VulnerabilityReport](VulnerabilityReport.md)
+Here is a link to our ![VulnerabilityReport](/VulnerabilityReport.md)
