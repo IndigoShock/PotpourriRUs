@@ -47,13 +47,13 @@ namespace PuffyAmiYumi.Controllers
 
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("<h2>Thanks for being so curious!</h2>");
-            sb.AppendLine("<p> Have a look at your silly selections: ");
+            sb.AppendLine("<p> Have a look at your purchases: ");
             foreach (OrderItems product in order.Products)
             {
                 sb.Append($"Item: {product.ItemName} <br/>");
                 sb.AppendLine($"Price: {product.Price} <br/>");
             }
-            sb.AppendLine($"Total Price: {order.Total}:");
+            sb.AppendLine($"Total Price: ${order.Total}");
             sb.Append("</p>");
 
             await _emailSender.SendEmailAsync(user.Email, "Thank you for your order at Potpourri-R-Us!", sb.ToString());
@@ -69,5 +69,7 @@ namespace PuffyAmiYumi.Controllers
             List<Order> orders = _context.GetOrders(number);
                 return View("AdminOrders");
         }
+    }
+
     }
 }
