@@ -14,10 +14,10 @@ Potpourri-R-Us is an E-Commerce site that sells only Potpourri for users who are
 3. ASP.NET web API packages
 
 ## Visuals
-- ![Visual 1](~asset/PotpourriHome.JPG)
-- ![Visual 2](~asset/PotpourriShop.JPG)
-- ![Visual 3](~asset/PotpourriCart.JPG)
-- ![Visual 4](~assetPotpourriPayment.JPG)
+- ![Visual 1](asset/PotpourriHome.JPG)
+- ![Visual 2](asset/PotpourriShop.JPG)
+- ![Visual 3](asset/PotpourriCart.JPG)
+- ![Visual 4](asset/PotpourriPayment.JPG)
 
 ## Architecture
 This application is created using ASP.NET Core 2.1 Web Application <br />
