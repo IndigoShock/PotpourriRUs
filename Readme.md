@@ -14,9 +14,16 @@ Potpourri-R-Us is an E-Commerce site that sells only Potpourri for users who are
 3. ASP.NET web API packages
 
 ## Visuals
-- ![Visual 1](asset/PotpourriHome.JPG)
+Home Page
+- ![HomePage](asset/PotpourriHome.JPG)
+
+Shop Page
 - ![Visual 2](asset/PotpourriShop.JPG)
+
+Cart Page
 - ![Visual 3](asset/PotpourriCart.JPG)
+
+Payment Page
 - ![Visual 4](asset/PotpourriPayment.JPG)
 
 ## Architecture
