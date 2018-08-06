@@ -51,24 +51,5 @@ Since the YumiDatabase is more about the products and the basket, this will be e
 Depending on their access, they will have access to Products or the Cart plus CartItem. Admins have access to the Products while the Member will have access to the Cart and CartItem. Products are in line with every piece of detail of the item such as the Product Name, Products Id, SKU, how much left in Stock and Price.  The product information is derived from the hard-coded info stored in the database.The Member will be able to see all of these except for the stock since this information is more private.
 Instead, they see the Cart and CartItem, which will be attached to their account. Each Cart will have a list of CartItems. And the CartItems have more detailed properties like Name, ProductId, Image, Pricing and so on.
 
-## Change Log
-**Week One** <br />
-*Monday* - Scaffold files, deployed to azure, implemented seed data, Set up databases, YumiDb and ApplicationDb.<br />
-*Tuesday* - Created Homepage, Login Page, Register Account Page, Implemented Identity
-*Wednesday* - Added in Products into Database. Shared-navbar made. Set up Claims and Policy for Admin and Member users. Handler has a class which requires Email. ViewModel made for Login and Register.<br /> 
-*Thursday* - Created Admin controller. Added more onto the AccountController.<br />
-*Friday* - <br />
-
-**Week Two** <br />
-*Monday* - Created a products page to show all of the products in the store.<br />
-*Tuesday* - Added more onto the AdminController.<br />
-*Wednesday* - Created ShopController with CRUD operations. Created Interfaces for Cart. <br />
-*Thursday* - Created Cart with cart items. Created CartController. Created View Components. Added OAuth for Microsoft and Google.<br />
-*Friday* - Day was taken off for Career Development Day.
-
-**Week Three** <br />
-*Monday* - TBD <br />
-*Tuesday* - TBD <br />
-*Wednesday* - TBD <br />
-*Thursday* - TBD <br />
-*Friday* - TBD <br />
+## Vulnerability Report
+Here is a link to our Vulnerability Report ![VulnerabilityReport](VulnerabilityReport.md)
