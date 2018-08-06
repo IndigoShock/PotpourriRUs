@@ -15,16 +15,16 @@ Potpourri-R-Us is an E-Commerce site that sells only Potpourri for users who are
 
 ## Visuals
 Home Page
-- ![HomePage](asset/PotpourriHome.JPG)
+- ![HomePage](PuffyAmiYumi/wwwroot/asset/PotpourriHome.JPG)
 
 Shop Page
-- ![Visual 2](asset/PotpourriShop.JPG)
+- ![Visual 2](PuffyAmiYumi/wwwroot/asset/PotpourriShop.JPG)
 
 Cart Page
-- ![Visual 3](asset/PotpourriCart.JPG)
+- ![Visual 3](PuffyAmiYumi/wwwroot/asset/PotpourriCart.JPG)
 
 Payment Page
-- ![Visual 4](asset/PotpourriPayment.JPG)
+- ![Visual 4](PuffyAmiYumi/wwwroot/asset/PotpourriPayment.JPG)
 
 ## Architecture
 This application is created using ASP.NET Core 2.1 Web Application <br />
@@ -42,7 +42,7 @@ The policies we are enforcing are Email and whichever role the user is assigned.
 The OAuth Providers we chose are Microsoft and Google.
 
 ## Database Schema
-![Db Schema](~/asset/PotpourriDbSchema.png)
+![Db Schema](PuffyAmiYumi/wwwroot/asset/PotpourriDbSchema.png)
 
 #Explanation Of Database Schema
 This application is using two databases. One called the YumiDatabase and the other called the ApplicationDatabase. The YumiDatabase is primarily for the products. The ApplicationDatabase is primarily for the Application Users.
