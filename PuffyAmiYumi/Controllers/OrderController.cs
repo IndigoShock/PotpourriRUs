@@ -46,8 +46,8 @@ namespace PuffyAmiYumi.Controllers
             await _context.SaveOrder(order);
 
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine("<h2>Thanks for being so curious!</h2>");
-            sb.AppendLine("<p> Have a look at your silly selections: ");
+            sb.AppendLine("<h2>Here is your Potpourri!</h2>");
+            sb.AppendLine("<p>Below is what you selected. Enjoy! : ");
             foreach (OrderItems product in order.Products)
             {
                 sb.Append($"Item: {product.ItemName} <br/>");
