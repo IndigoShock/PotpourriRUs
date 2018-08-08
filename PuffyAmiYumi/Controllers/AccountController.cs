@@ -216,7 +216,17 @@ namespace PuffyAmiYumi.Controllers
                     claims.Add(emailClaim);
 
                     await _userManager.AddClaimsAsync(user, claims);
-                    await _userManager.AddToRoleAsync(user, ApplicationRoles.Member);
+                    
+                    if (user.Email.Contains(); == "@codefellows.com")
+                    {
+                        await _userManager.AddToRoleAsync(user, ApplicationRoles.Member);
+                        await _userManager.AddToRoleAsync(user, ApplicationRoles.Admin);
+                    }
+                    else
+                    {
+                        await _userManager.AddToRoleAsync(user, ApplicationRoles.Member);
+                    }
+                    
                     SendEmail(user.Email);
 
                     return RedirectToAction("Login", "Account");
